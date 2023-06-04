@@ -1,0 +1,78 @@
+void OnProjectLoad (void) {
+  Project.SetConsoleLogFile("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\debug\result\run.log");
+  Project.SetDevice ("STM32F407VG");
+  Project.SetHostIF ("USB", "59768862");
+  Project.SetTargetIF ("JTAG");
+  Project.SetTIFSpeed ("4 MHz");
+  File.Open ("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\compile\Gpio_TS_001.elf");
+  Target.EraseChip();
+  Util.Log("Jdebug script: OnProjectLoad is running");
+}
+
+void OnStartupComplete (void) {
+    Util.Log("Jdebug script: OnStartupComplete is running");
+    Break.Set(0x08000978); // luôn có 1 breakpoint ở trong đầu hàm main, sau đó tạo breakpoint này để sau này nhảy tới sẽ dừng ở đây
+}
+
+void AfterTargetReset (void) {
+  unsigned int SP;
+  unsigned int PC;
+  unsigned int VectorTableAddr;
+  
+  Util.Log("Jdebug script: AfterTargetReset is running");
+  VectorTableAddr = Elf.GetBaseAddr();
+ 
+  SP = Target.ReadU32(VectorTableAddr);
+  if (SP != 0xFFFFFFFF) {
+    Target.SetReg("SP", SP);
+  }
+ 
+
+  PC = Elf.GetEntryPointPC();  
+  if (PC != 0xFFFFFFFF) {                                         
+    Target.SetReg("PC", PC);                                    
+  } else if (VectorTableAddr != 0xFFFFFFFF) {                     
+    PC = Target.ReadU32(VectorTableAddr + 4);                     
+    Target.SetReg("PC", PC);                                    
+  }
+}
+
+void AfterTargetDownload (void) {
+  unsigned int SP;
+  unsigned int PC;
+  unsigned int VectorTableAddr;
+  
+  Util.Log("Jdebug script: AfterTargetDownload is running");
+  VectorTableAddr = Elf.GetBaseAddr();
+ 
+  SP = Target.ReadU32(VectorTableAddr);
+  if (SP != 0xFFFFFFFF) {
+    Target.SetReg("SP", SP);
+  }
+ 
+
+  PC = Elf.GetEntryPointPC();  
+  if (PC != 0xFFFFFFFF) {                                         
+    Target.SetReg("PC", PC);                                    
+  } else if (VectorTableAddr != 0xFFFFFFFF) {                     
+    PC = Target.ReadU32(VectorTableAddr + 4);                     
+    Target.SetReg("PC", PC);                                    
+  }
+} 
+
+void AfterTargetHalt (void) {
+   
+    if(1){
+        Util.Log("Jdebug script: AfterTargetHalt is running");
+        if(Target.GetReg("R15") == (0x08000978)) 
+        {
+            Target.SaveMemory("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\debug\result\dump.log", 0x20000014 - 1, 10); // TestCaseResult[10]
+            Debug.Stop();
+            File.Exit();
+        }
+    }
+}
+
+void AfterProjectLoad (void) {
+    Debug.Start();
+}

@@ -1,0 +1,4 @@
+loadfile PATH_HEX_REPLACE 0x0
+r
+g
+exit

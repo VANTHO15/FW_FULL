@@ -1,0 +1,78 @@
+void OnProjectLoad (void) {
+  Project.SetConsoleLogFile("CONSOLE_FILE_JDEBUG");
+  Project.SetDevice ("TARGET_JDEBUG");
+  Project.SetHostIF ("IF_TMP_JDEBUG", "HostIF_JDEBUG");
+  Project.SetTargetIF ("DEBUG_INTERFACE");
+  Project.SetTIFSpeed ("4 MHz");
+  File.Open ("ELF_FILE_JDEBUG");
+  Target.EraseChip();
+  Util.Log("Jdebug script: OnProjectLoad is running");
+}
+
+void OnStartupComplete (void) {
+    Util.Log("Jdebug script: OnStartupComplete is running");
+    Break.Set(END_OF_TEST_JDEBUG); // luôn có 1 breakpoint ở trong đầu hàm main, sau đó tạo breakpoint này để sau này nhảy tới sẽ dừng ở đây
+}
+
+void AfterTargetReset (void) {
+  unsigned int SP;
+  unsigned int PC;
+  unsigned int VectorTableAddr;
+  
+  Util.Log("Jdebug script: AfterTargetReset is running");
+  VectorTableAddr = Elf.GetBaseAddr();
+ 
+  SP = Target.ReadU32(VectorTableAddr);
+  if (SP != 0xFFFFFFFF) {
+    Target.SetReg("SP", SP);
+  }
+ 
+
+  PC = Elf.GetEntryPointPC();  
+  if (PC != 0xFFFFFFFF) {                                         
+    Target.SetReg("PC", PC);                                    
+  } else if (VectorTableAddr != 0xFFFFFFFF) {                     
+    PC = Target.ReadU32(VectorTableAddr + 4);                     
+    Target.SetReg("PC", PC);                                    
+  }
+}
+
+void AfterTargetDownload (void) {
+  unsigned int SP;
+  unsigned int PC;
+  unsigned int VectorTableAddr;
+  
+  Util.Log("Jdebug script: AfterTargetDownload is running");
+  VectorTableAddr = Elf.GetBaseAddr();
+ 
+  SP = Target.ReadU32(VectorTableAddr);
+  if (SP != 0xFFFFFFFF) {
+    Target.SetReg("SP", SP);
+  }
+ 
+
+  PC = Elf.GetEntryPointPC();  
+  if (PC != 0xFFFFFFFF) {                                         
+    Target.SetReg("PC", PC);                                    
+  } else if (VectorTableAddr != 0xFFFFFFFF) {                     
+    PC = Target.ReadU32(VectorTableAddr + 4);                     
+    Target.SetReg("PC", PC);                                    
+  }
+} 
+
+void AfterTargetHalt (void) {
+   
+    if(DEBUG_MODE_JDEBUG){
+        Util.Log("Jdebug script: AfterTargetHalt is running");
+        if(Target.GetReg("R15") == (END_OF_TEST_JDEBUG)) 
+        {
+            Target.SaveMemory("DUMP_FILE", RESULT_ADDRESS_JDEBUG - 1, 10); // TestCaseResult[10]
+            Debug.Stop();
+            File.Exit();
+        }
+    }
+}
+
+void AfterProjectLoad (void) {
+    Debug.Start();
+}

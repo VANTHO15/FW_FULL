@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-2-1_STRICT_COMPACT.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>EB</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>PostBuildSelectable</SHORT-NAME>
+          <ELEMENTS>
+            <PREDEFINED-VARIANT>
+              <SHORT-NAME>VS0</SHORT-NAME>
+              <POST-BUILD-VARIANT-CRITERION-VALUE-SET-REFS>
+                <POST-BUILD-VARIANT-CRITERION-VALUE-SET-REF DEST="POST-BUILD-VARIANT-CRITERION-VALUE-SET">/EB/PostBuildSelectable/PostBuildCriterionValueSet_VS0</POST-BUILD-VARIANT-CRITERION-VALUE-SET-REF>
+              </POST-BUILD-VARIANT-CRITERION-VALUE-SET-REFS>
+            </PREDEFINED-VARIANT>
+            <PREDEFINED-VARIANT>
+              <SHORT-NAME>VS1</SHORT-NAME>
+              <POST-BUILD-VARIANT-CRITERION-VALUE-SET-REFS>
+                <POST-BUILD-VARIANT-CRITERION-VALUE-SET-REF DEST="POST-BUILD-VARIANT-CRITERION-VALUE-SET">/EB/PostBuildSelectable/PostBuildCriterionValueSet_VS1</POST-BUILD-VARIANT-CRITERION-VALUE-SET-REF>
+              </POST-BUILD-VARIANT-CRITERION-VALUE-SET-REFS>
+            </PREDEFINED-VARIANT>
+            <POST-BUILD-VARIANT-CRITERION-VALUE-SET>
+              <SHORT-NAME>PostBuildCriterionValueSet_VS0</SHORT-NAME>
+              <POST-BUILD-VARIANT-CRITERION-VALUES>
+                <POST-BUILD-VARIANT-CRITERION-VALUE>
+                  <VARIANT-CRITERION-REF DEST="POST-BUILD-VARIANT-CRITERION">/EB/PostBuildSelectable/Criterions/myTho</VARIANT-CRITERION-REF>
+                  <VALUE>0</VALUE>
+                </POST-BUILD-VARIANT-CRITERION-VALUE>
+              </POST-BUILD-VARIANT-CRITERION-VALUES>
+            </POST-BUILD-VARIANT-CRITERION-VALUE-SET>
+            <POST-BUILD-VARIANT-CRITERION-VALUE-SET>
+              <SHORT-NAME>PostBuildCriterionValueSet_VS1</SHORT-NAME>
+              <POST-BUILD-VARIANT-CRITERION-VALUES>
+                <POST-BUILD-VARIANT-CRITERION-VALUE>
+                  <VARIANT-CRITERION-REF DEST="POST-BUILD-VARIANT-CRITERION">/EB/PostBuildSelectable/Criterions/myTho</VARIANT-CRITERION-REF>
+                  <VALUE>1</VALUE>
+                </POST-BUILD-VARIANT-CRITERION-VALUE>
+              </POST-BUILD-VARIANT-CRITERION-VALUES>
+            </POST-BUILD-VARIANT-CRITERION-VALUE-SET>
+          </ELEMENTS>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Criterions</SHORT-NAME>
+              <ELEMENTS>
+                <COMPU-METHOD>
+                  <SHORT-NAME>CompuMethod_myTho</SHORT-NAME>
+                  <CATEGORY>TEXTTABLE</CATEGORY>
+                  <COMPU-INTERNAL-TO-PHYS>
+                    <COMPU-SCALES>
+                      <COMPU-SCALE>
+                        <LOWER-LIMIT>0</LOWER-LIMIT>
+                        <UPPER-LIMIT>0</UPPER-LIMIT>
+                        <COMPU-CONST>
+                          <VT></VT>
+                        </COMPU-CONST>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <LOWER-LIMIT>1</LOWER-LIMIT>
+                        <UPPER-LIMIT>1</UPPER-LIMIT>
+                        <COMPU-CONST>
+                          <VT></VT>
+                        </COMPU-CONST>
+                      </COMPU-SCALE>
+                    </COMPU-SCALES>
+                  </COMPU-INTERNAL-TO-PHYS>
+                </COMPU-METHOD>
+                <POST-BUILD-VARIANT-CRITERION>
+                  <SHORT-NAME>myTho</SHORT-NAME>
+                  <COMPU-METHOD-REF DEST="COMPU-METHOD">/EB/PostBuildSelectable/Criterions/CompuMethod_myTho</COMPU-METHOD-REF>
+                </POST-BUILD-VARIANT-CRITERION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+
