@@ -1,55 +1,101 @@
-ENTRY(Reset_Handler)
+define symbol __ICFEDIT_region_FLASH_C0_start__             = 0x08000000;
+define symbol __ICFEDIT_region_FLASH_C0_end__               = 0x080F9F00; 
 
-/* Highest address of the user mode stack */
-_estack = ORIGIN(SRAM) + LENGTH(SRAM); /* end of "SRAM" Ram type memory */
+define symbol __ICFEDIT_region_FLS_RSV_FLASH_C0_start__     = 0x080F9F00;
+define symbol __ICFEDIT_region_FLS_RSV_FLASH_C0_end__       = 0x080FA000; 
 
-MEMORY
-{
-  FLASH(rx):ORIGIN =0x08000000,LENGTH =1024K
-  SRAM(rwx):ORIGIN =0x20000000,LENGTH =128K
-}
+define symbol __ICFEDIT_region_SRAM_C0_start__              = 0x20000000;
+define symbol __ICFEDIT_region_SRAM_C0_end__                = 0x20013880; 
 
-SECTIONS
-{
-  .text :
-  {
-    *(.isr_vector)
-    *(.text)
-	*(.text.*)
-	*(.init)
-	*(.fini)
-	*(.rodata)
-	*(.rodata.*)
-	. = ALIGN(4);
-	_etext = .;
-  }> FLASH
+define symbol __ICFEDIT_region_FLS_RSV_RAM_C0_start__       = 0x20013880;
+define symbol __ICFEDIT_region_FLS_RSV_RAM_C0_end__         = 0x20013980; 
 
-  /* Used by the startup to initialize data */
-  _sidata = LOADADDR(.data);
-  
-  .data :
-  {
-    _sdata = .;
-	*(.data)
-	*(.data.*)
-	. = ALIGN(4);
-	_edata = .;
-  }> SRAM AT> FLASH
-  
-  .bss :
-  {
-    _sbss = .;
-	__bss_start__ = _sbss;
-	*(.bss)
-	*(.bss.*)
-	*(COMMON)
-	. = ALIGN(4);
-	_ebss = .;
-	__bss_end__ = _ebss;
-	   . = ALIGN(4); 
-	end = .;
-	__end__ = .;
-  }> SRAM
+define symbol __ICFEDIT_region_SRAM_STACK_C0_start__        = 0x20013980;
+define symbol __ICFEDIT_region_SRAM_STACK_C0_end__          = 0x200157C0; 
 
-  
-}
+define symbol __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_start__ = 0x200157C0;
+define symbol __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_end__   = 0x2001A5E0;
+
+define symbol __ICFEDIT_region_SRAM_SHAREABLE_start__       = 0x2001A5E0;
+define symbol __ICFEDIT_region_SRAM_SHAREABLE_end__         = 0x2001F400; 
+
+define symbol __ICFEDIT_region_SRAM_END_C0__                = 0x2001F400;
+
+define exported symbol __Stack_end_c0      = __ICFEDIT_region_SRAM_STACK_C0_start__;
+define exported symbol __Stack_start_c0    = __ICFEDIT_region_SRAM_STACK_C0_end__;
+
+define exported symbol __RAM_INIT          = 1;
+define exported symbol __INT_SRAM_START    = __ICFEDIT_region_SRAM_C0_start__;
+define exported symbol __INT_SRAM_END      = __ICFEDIT_region_SRAM_END_C0__;
+
+/* Fls module access code support */
+define exported symbol Fls_ACEraseRomStart  = __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
+define exported symbol Fls_ACEraseRomEnd    = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ ;
+define exported symbol Fls_ACEraseSize      = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ - __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
+
+define exported symbol Fls_ACWriteRomStart  = __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
+define exported symbol Fls_ACWriteRomEnd    = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ ;
+define exported symbol Fls_ACWriteSize      = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ - __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
+
+define memory mem with size = 4G;
+define region int_flash_region         = mem:[from __ICFEDIT_region_FLASH_C0_start__ to __ICFEDIT_region_FLASH_C0_end__];
+define region int_flash_fls_rsv_region = mem:[from __ICFEDIT_region_FLS_RSV_FLASH_C0_start__ to __ICFEDIT_region_FLS_RSV_FLASH_C0_end__];
+define region int_sram_region          = mem:[from __ICFEDIT_region_SRAM_C0_start__ to __ICFEDIT_region_SRAM_C0_end__];
+define region int_sram_fls_rsv_region  = mem:[from __ICFEDIT_region_FLS_RSV_RAM_C0_start__ to __ICFEDIT_region_FLS_RSV_RAM_C0_end__];
+define region int_sram_no_cacheable    = mem:[from __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_start__ to __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_end__];
+define region int_sram_shareable       = mem:[from __ICFEDIT_region_SRAM_SHAREABLE_start__ to __ICFEDIT_region_SRAM_SHAREABLE_end__];
+
+initialize manually {
+                     section .data,
+                     section .mcal_data,
+                     section .mcal_data_no_cacheable,
+                     section .mcal_const_no_cacheable,
+                     section .ramcode,
+                     section .intvec
+                    };
+
+do not initialize { 
+                    section .bss,
+                    section .mcal_bss,
+                    section .mcal_bss_no_cacheable,
+                    section .mcal_shared_bss,
+                    section .data,
+                    section .mcal_data,
+                    section .mcal_data_no_cacheable,
+                    section .mcal_shared_data,
+                    section .mcal_const_no_cacheable,
+                    section .ramcode
+                  };
+
+/* Flash region */
+define block startupBlock with fixed order                      { section .core_loop, section .startup, section .systeminit };
+define block codeBlock with fixed order                         { section .text, section .mcal_text, section .acmcu_code_rom };
+define block roBlock with fixed order                           { section .rodata, section .mcal_const_cfg, section .mcal_const };
+define block initBlock with fixed order                         { section .init_table, section .zero_table, section .iar.* };
+define block initvectortable with fixed order, alignment = 4096 { section .intvec_init };
+define block initdata with fixed order, alignment = 4           { section .data_init, section .mcal_data_init, section .ramcode_init };
+define block initdata_nocache with fixed order, alignment = 4   { section .mcal_data_no_cacheable_init, section .mcal_const_no_cacheable_init };
+define block initdata_sharable with fixed order, alignment = 4  { section .mcal_shared_data_init };
+define block AppACFLSCode with fixed order                      { section .acfls_code_rom};
+
+/* Ram region */
+define block vectortable with fixed order, alignment = 4096     { section .intvec };
+define block data with fixed order, alignment = 4               { section .data, section .mcal_data, section .ramcode };
+define block data_nocache with fixed order, alignment = 4       { section .mcal_data_no_cacheable, section .mcal_const_no_cacheable };
+define block data_sharable with fixed order, alignment = 4      { section .mcal_shared_data };
+define block bss with fixed order, alignment = 4                { section .bss, section .mcal_bss };
+define block bss_nocache with fixed order, alignment = 4        { section .mcal_bss_no_cacheable };
+define block bss_sharable with fixed order, alignment = 4       { section .mcal_shared_bss };
+
+place in int_flash_region         { block startupBlock, block codeBlock, block roBlock, block initBlock };
+place in int_flash_region         { block initvectortable };
+place in int_flash_region         { block initdata, block initdata_nocache, block initdata_sharable };
+place in int_flash_fls_rsv_region { block AppACFLSCode };
+place in int_sram_region          { block data, block bss };
+place in int_sram_no_cacheable    { block vectortable, block bss_nocache, block data_nocache };
+place in int_sram_shareable       { block data_sharable, block bss_sharable };
+
+define exported symbol __ROM_CODE_START          = __ICFEDIT_region_FLASH_C0_start__;
+define exported symbol __RAM_SHAREABLE_START     = __ICFEDIT_region_SRAM_SHAREABLE_start__;
+define exported symbol __RAM_STACK_START         = __ICFEDIT_region_SRAM_STACK_C0_start__;
+define exported symbol __RAM_NO_CACHEABLE_START  = __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_start__;

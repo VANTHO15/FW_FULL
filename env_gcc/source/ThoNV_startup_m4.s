@@ -27,7 +27,7 @@
 .section ".startup","ax"
 .thumb
 .set VTOR_REG,  0xE000ED08                      /* Vector Table Offset Register */
-/*.set MASTER_ID, 0x4001FC00   /*               /* Đọc giá trị trong địa chỉ này để xem đang là core nào */
+/*.set MASTER_ID, 0x4001FC00   */               /* Đọc giá trị trong địa chỉ này để xem đang là core nào */
 .set MAIN_CORE, 0x0
 
 .thumb 
@@ -61,13 +61,13 @@ _MAIN:
   CPSIE i  /* Vô hiệu hoá tất cả các ngắt  */
   BL main
   
+.globl ThoNVEnd
+ThoNVEnd:
+    CMP R1,#1
 
 /******************************************************************************
 /* Function defination                                                       */
 /*****************************************************************************/
-
-/* Wait For Board ổn định */
-
 
 /* Clear các Register */
 ClearRegister:
@@ -181,17 +181,6 @@ ClearBss_End:
 .globl VTABLE_END
 .globl VTABLE_SIZE
 
-.globl __Stack_start_c0          /* Top of Stack for Initial Stack Pointer */
-.globl Reset_Handler             /* Reset Handler */
-.globl NMI_Handler               /* NMI Handler */
-.globl HardFault_Handler         /* Hard Fault Handler */
-.globl MemManage_Handler         /* Reserved */
-.globl BusFault_Handler          /* Bus Fault Handler */
-.globl UsageFault_Handler        /* Usage Fault Handler */
-.globl SVC_Handler               /* SVCall Handler */
-.globl DebugMon_Handler          /* Debug Monitor Handler */
-.globl PendSV_Handler            /* PendSV Handler */
-.globl SysTick_Handler           /* SysTick Handler */ /* 15*/
 VTABLE:
   .long  __Stack_start_c0
   .long Reset_Handler
@@ -288,9 +277,9 @@ VTABLE:
   .long	OTG_HS_WKUP_IRQHandler       			/* USB On The Go HS Wakeup through EXTI interrupt                     */
   .long	OTG_HS_IRQHandler            			/* USB On The Go HS global interrupt                                  */
   .long	DCMI_IRQHandler              			/* DCMI global interrupt                                              */
-  .long	CRYP_IRQHandler              			/* CRYP crypto global interrupt                                       */
-  .long	HASH_RNG_IRQHandler          			/* Hash and Rng global interrupt                                      */
-  .long	FPU_IRQHandler               			/* Floating point interrupt                                           */
+  .long	CRYP_IRQHandler              			/* Hash and Rng global interrupt                                      */
+  .long	FPU_IRQHandler               			/* CRYP crypto global interrupt                                       */
+  .long	HASH_RNG_IRQHandler          			/* Floating point interrupt                                           */
   .long	0                            			/* Reserved                                                           */
   .long	0                            			/* Reserved                                                           */
   .long	0                            			/* Reserved                                                           */

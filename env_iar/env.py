@@ -1,8 +1,8 @@
 LINKER_FILE = f'{PRO_DIR}/../env_{COMPILER}/linker/ThoNV_stm32f407.icf'
-LK_FILE = f'{COMPILER_DIR_GCC}/bin/ilinkarm.exe'
-CC_FILE = f'{COMPILER_DIR_GCC}/bin/iccarm.exe'
-AC_FILE = f'{COMPILER_DIR_GCC}/bin/iasmarm.exe'
-POST_COMPILE = f'{COMPILER_DIR_GCC}/bin/ielftool.exe'
+LK_FILE = f'{COMPILER_DIR_IAR}/bin/ilinkarm.exe'
+CC_FILE = f'{COMPILER_DIR_IAR}/bin/iccarm.exe'
+AC_FILE = f'{COMPILER_DIR_IAR}/bin/iasmarm.exe'
+POST_COMPILE = f'{COMPILER_DIR_IAR}/bin/ielftool.exe'
 
 BIN_COMPILE_OPTS= [
     '--bin',
@@ -15,28 +15,30 @@ HEX_COMPILE_OPTS = [
 
 CC_OPTS = [
     '-c',
-    '-mcpu=cortex-m4',
-    '-mthumb',
-    '-mlittle-endian',
-    '-O0',
-    '-g'
+    '--cpu=Cortex-M4',
+    '--cpu_mode=thumb',
+    '--endian=little',
+    '--fpu=FPv4-SP',
+    '--debug',
+    '-Ohz',
+    '--no_clustering',
+    '--no_mem_idioms',
+    '--diag_suppress=Pa050'
 ]
 
 LK_OPTS = [
-    f'-Wl,-Map,MAP_FILE_REPLACE',
+    '--cpu=Cortex-M4',
+    '--fpu=FPv4-SP',
     '--entry=Reset_Handler',
-    '-specs=nano.specs',
-    '-specs=nosys.specs',
-    '-mcpu=cortex-m4',
-    '-mlittle-endian',
-    '-n',
-    '-T',
-    f'{LINKER_FILE}'
+    '--enable_stack_usage',
+    '--no_wrap_diagnostics',
+    '--config',
+    f'{LINKER_FILE}',
+    '--map',
+    'MAP_FILE_REPLACE'
 ]
 AC_OPTS = [
-    '-c',
-    '-mthumb',
-    '-mcpu=cortex-m4',
-    '-x',
-    'assembler-with-cpp'
+    # '--cpu=Cortex-M4',
+    # '--cpu_mode=thumb',
+    '-r'
 ]

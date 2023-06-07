@@ -58,9 +58,10 @@ class Compile(CommonStep):
         # Lấy linker Option
         LinkerOption = [opt.replace("MAP_FILE_REPLACE", self.mTest.MAP_FILE) for opt in self.mTest.LK_OPTS]
         ListCommands = []
-
+       
         for SRC_FILE in SRC_FILES:
             # Chuyển file .c thành .o
+            print(SRC_FILE)
             SRC_FILE = os.path.normpath(SRC_FILE)   # ví dụ  C://  -> C:/
             logging.info(f"File compile : {SRC_FILE}")
             Filename = os.path.basename(SRC_FILE) # Lấy tên của file
