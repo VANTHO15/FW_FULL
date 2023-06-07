@@ -11,7 +11,7 @@ void OnProjectLoad (void) {
 
 void OnStartupComplete (void) {
     Util.Log("Jdebug script: OnStartupComplete is running");
-    Break.Set(0x08000978); // luôn có 1 breakpoint ở trong đầu hàm main, sau đó tạo breakpoint này để sau này nhảy tới sẽ dừng ở đây
+    Break.Set(0x0800097c); // luôn có 1 breakpoint ở trong đầu hàm main, sau đó tạo breakpoint này để sau này nhảy tới sẽ dừng ở đây
 }
 
 void AfterTargetReset (void) {
@@ -64,7 +64,7 @@ void AfterTargetHalt (void) {
    
     if(1){
         Util.Log("Jdebug script: AfterTargetHalt is running");
-        if(Target.GetReg("R15") == (0x08000978)) 
+        if(Target.GetReg("R15") == (0x0800097c)) 
         {
             Target.SaveMemory("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\debug\result\dump.log", 0x20000014 - 1, 10); // TestCaseResult[10]
             Debug.Stop();

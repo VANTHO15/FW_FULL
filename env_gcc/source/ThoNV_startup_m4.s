@@ -14,6 +14,7 @@
   .long __data_shareable_start
   .long __init_data_shareable_start
   .long __init_data_shareable_end
+
 .section ".zero_table", "a"
   .long __bss_start__
   .long __bss_end__
@@ -36,6 +37,9 @@
 _start:
 Reset_Handler:
 
+/* Clear Register */
+BL ClearRegister
+
 /* Reset core register */
 BL SetUpVtorRegister
 
@@ -43,7 +47,7 @@ BL SetUpVtorRegister
 BL SetStack
 
 /* Clear Ram */
-BL ClearRAM
+BL RamInit
 
 /* Copy initialized data from Rom to Ram */
 BL InitData
@@ -66,7 +70,7 @@ _MAIN:
 
 
 /* Clear các Register */
-ClearGenericRegister:
+ClearRegister:
     MOV     R0,#0
     MOV     R1,#0
     MOV     R2,#0
@@ -82,64 +86,65 @@ ClearGenericRegister:
     MOV     R12,#0
     MOV     PC, LR
 
-/* Set Up Vtor Register */
+/* Gán giá trị VTOR_REG vào memory __vectortable_start */
 SetUpVtorRegister:
     LDR     R0, =VTOR_REG
     LDR     R1, =__vectortable_start
     STR     R1, [R0]
     MOV     PC, LR
 
-/* set stack pointer Core0 */
+/* set stack pointer Core0 cho MSP */
 SetStack:
     LDR     r0, =__Stack_start_c0
     MSR     MSP, r0
     MOV     PC, LR
 
-/* Clear RAM */
-ClearRAM:
+/* Ram Init */
+RamInit:
     LDR     R0, =__RAM_INIT
     CMP     R0, #0
-    /* Skip if __SRAM_INIT is not set */
-    BEQ     SRAM_Loop_End
+    /* Nếu __SRAM_INIT không bằng 0 thì bỏ qua */
+    BEQ     SRAM_End
     LDR     R1, =__INT_SRAM_START
     LDR     R2, =__INT_SRAM_END
     SUBS    R2, R1
-    BLE     SRAM_Loop_End
+    SUBS    R2, #1 
+    BLE     SRAM_End /* Nếu SUBS <= 0 thì nhảy */
     MOVS    R0, #0
     MOVS    R3, #0
 SRAM_Loop:
-    STM     R1!, {R0, R3}
+    STM     R1!, {R0, R3} /* Lưu trữ nội dung của các thanh ghi vào một vị trí bộ nhớ đã chỉ định*/
     SUBS    R2, #8
-    BGE     SRAM_Loop
-SRAM_Loop_End:
+    BGE     SRAM_Loop /* Nếu SUBS >= 0 thì nhảy */
+SRAM_End:
     MOV     PC, LR
 
 /* Init Data */
 InitData:
     LDR     R0, =__init_table
     LDR     R6, =__init_table_end
-    SUBS    R5, R6, R0
+    SUBS    R5, R6, R0 
     ADDS    R5, R5, #12
 SetaddRegionData:
     SUBS    R5, R5, #12
     CMP     R5, #0
-    BEQ     InitData_Loop_End
+    BEQ     InitData_End /* nếu bằng */
     LDR     R1, [R0]
     LDR     R2, [R0, #4]
     LDR     R3, [R0, #8]
     ADDS    R0, R0, #12
     SUBS    R4, R3, R2
     CMP     R4, #0
-    BEQ     SetaddRegionData
-CopyDataRomtoRam:
+    BEQ     SetaddRegionData /* nếu bằng */
+CopyDataFlashtoRam:
     LDR     R4,[R2]
     STR     R4,[R1]
     ADDS    R1, R1, #1
     ADDS    R2, R2, #1
     CMP     R2, R3
-    BEQ     SetaddRegionData
-    B       CopyDataRomtoRam
-InitData_Loop_End:
+    BEQ     SetaddRegionData /* nếu bằng */
+    B       CopyDataFlashtoRam
+InitData_End:
     MOV  PC, LR
 
 /* Clear Bss */
@@ -148,24 +153,24 @@ ClearBss:
     LDR     R6, =__zero_table_end
     SUBS    R5, R6, R0
     ADDS    R5, R5, #8
-SetaddRegionBss:
+SetAddRegionBss:
     SUBS    R5, R5, #8
     CMP     R5, #0
-    BEQ     ClearBss_Loop_End
+    BEQ     ClearBss_End
     LDR     R1, [R0]
     LDR     R2, [R0, #4]
     ADDS    R0, R0, #8
     SUBS    R4, R2, R1
     CMP     R4, #0
-    BEQ     SetaddRegionBss
+    BEQ     SetAddRegionBss
 EraseBss:
     MOVS    R4, #0
     STR     R4,[R1]
     ADDS    R1, R1, #1
     CMP     R2, R1
-    BEQ     SetaddRegionBss
+    BEQ     SetAddRegionBss
     B       EraseBss
-ClearBss_Loop_End:
+ClearBss_End:
     MOV     PC, LR
 
 .thumb
