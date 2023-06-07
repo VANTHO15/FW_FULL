@@ -164,46 +164,5 @@ SECTIONS
     __INT_SRAM_START            = ORIGIN(int_sram_c0);
     __INT_SRAM_END              = ORIGIN(ram_end_c0);
 
-    __VECTORTABLE_START         = __vectortable_start;
-    __INIT_VECTORTABLE_START    = __init_vectortable_start;
-    __INIT_VECTORTABLE_END      = __init_vectortable_end;
-    __DATA_START                = __data_start;
-    __INIT_DATA_START           = __init_data_start__;
-    __INIT_DATA_END             = __init_data_end__;
-    __DATA_NOCACHE_START        = __data_nocache_start;
-    __INIT_DATA_NOCACHE_START   = __init_data_nocache_start;
-    __INIT_DATA_NOCACHE_END     = __init_data_nocache_end;
-    __DATA_SHAREABLE_START      = __data_shareable_start;
-    __INIT_DATA_SHAREABLE_START = __init_data_shareable_start;
-    __INIT_DATA_SHAREABLE_END   = __init_data_shareable_end;
-
-    __BSS_START                 = __bss_start__ ;
-    __BSS_END                   = __bss_end__ ;
-    __BSS_NOCACHE_START         = __bss_nocache_start;
-    __BSS_NOCACHE_END           = __bss_nocache_end;
-    __BSS_SHAREABLE_START       = __bss_shareable_start;
-    __BSS_SHAREABLE_END         = __bss_shareable_end;
-
-    __INIT_TABLE                = __init_table;
-    __INIT_TABLE_END            = __init_table_end;
-    __ZERO_TABLE                = __zero_table;
-    __ZERO_TABLE_END            = __zero_table_end;
-
     __RAM_INIT                  = 1;
-
-    __ROM_CODE_START          = ORIGIN(int_flash_c0);
-    __RAM_SHAREABLE_START     = ORIGIN(int_sram_shareable);
-    __RAM_STACK_START         = ORIGIN(int_sram_stack_c0);
-    __RAM_NO_CACHEABLE_START  = ORIGIN(int_sram_no_cacheable_c0);
-
-    Fls_ACEraseRomStart         = __acfls_code_rom_start;
-    Fls_ACEraseRomEnd           = __acfls_code_rom_end;
-    Fls_ACEraseSize             = (__acfls_code_rom_end - __acfls_code_rom_start)/4;
-
-    Fls_ACWriteRomStart         = __acfls_code_rom_start;
-    Fls_ACWriteRomEnd           = __acfls_code_rom_end;
-    Fls_ACWriteSize             = (__acfls_code_rom_end - __acfls_code_rom_start)/4;
-    
-    _ERASE_FUNC_ADDRESS_        = ADDR(.acfls_code_ram);
-    _WRITE_FUNC_ADDRESS_        = ADDR(.acfls_code_ram);
 }

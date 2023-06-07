@@ -2,25 +2,25 @@
 .arch armv7-m
 
 .section ".init_table", "a"
-  .long __VECTORTABLE_START
-  .long __INIT_VECTORTABLE_START
-  .long __INIT_VECTORTABLE_END
-  .long __DATA_START
-  .long __INIT_DATA_START
-  .long __INIT_DATA_END
-  .long __DATA_NOCACHE_START
-  .long __INIT_DATA_NOCACHE_START
-  .long __INIT_DATA_NOCACHE_END
-  .long __DATA_SHAREABLE_START
-  .long __INIT_DATA_SHAREABLE_START
-  .long __INIT_DATA_SHAREABLE_END
+  .long __vectortable_start
+  .long __init_vectortable_start
+  .long __init_vectortable_end
+  .long __data_start
+  .long __init_data_start__
+  .long __init_data_end__
+  .long __data_nocache_start
+  .long __init_data_nocache_start
+  .long __init_data_nocache_end
+  .long __data_shareable_start
+  .long __init_data_shareable_start
+  .long __init_data_shareable_end
 .section ".zero_table", "a"
-  .long __BSS_START
-  .long __BSS_END
-  .long __BSS_NOCACHE_START
-  .long __BSS_NOCACHE_END
-  .long __BSS_SHAREABLE_START
-  .long __BSS_SHAREABLE_END
+  .long __bss_start__
+  .long __bss_end__
+  .long __bss_nocache_start
+  .long __bss_nocache_end
+  .long __bss_shareable_start
+  .long __bss_shareable_end
 
 
 .section ".startup","ax"
@@ -85,7 +85,7 @@ ClearGenericRegister:
 /* Set Up Vtor Register */
 SetUpVtorRegister:
     LDR     R0, =VTOR_REG
-    LDR     R1, =__VECTORTABLE_START
+    LDR     R1, =__vectortable_start
     STR     R1, [R0]
     MOV     PC, LR
 
@@ -116,8 +116,8 @@ SRAM_Loop_End:
 
 /* Init Data */
 InitData:
-    LDR     R0, =__INIT_TABLE
-    LDR     R6, =__INIT_TABLE_END
+    LDR     R0, =__init_table
+    LDR     R6, =__init_table_end
     SUBS    R5, R6, R0
     ADDS    R5, R5, #12
 SetaddRegionData:
@@ -144,8 +144,8 @@ InitData_Loop_End:
 
 /* Clear Bss */
 ClearBss:
-    LDR     R0, =__ZERO_TABLE
-    LDR     R6, =__ZERO_TABLE_END
+    LDR     R0, =__zero_table
+    LDR     R6, =__zero_table_end
     SUBS    R5, R6, R0
     ADDS    R5, R5, #8
 SetaddRegionBss:

@@ -304,41 +304,7 @@ LOAD F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\compile\Gpi
                 0x200157c0                __Stack_start_c0 = (ORIGIN (int_sram_stack_c0) + LENGTH (int_sram_stack_c0))
                 0x20000000                __INT_SRAM_START = ORIGIN (int_sram_c0)
                 0x2001f400                __INT_SRAM_END = ORIGIN (ram_end_c0)
-                0x20016000                __VECTORTABLE_START = __vectortable_start
-                0x08001000                __INIT_VECTORTABLE_START = __init_vectortable_start
-                0x080011b0                __INIT_VECTORTABLE_END = __init_vectortable_end
-                0x20000000                __DATA_START = __data_start
-                0x080011b0                __INIT_DATA_START = __init_data_start__
-                0x080011c0                __INIT_DATA_END = __init_data_end__
-                0x200161b0                __DATA_NOCACHE_START = __data_nocache_start
-                0x080011c0                __INIT_DATA_NOCACHE_START = __init_data_nocache_start
-                0x080011c0                __INIT_DATA_NOCACHE_END = __init_data_nocache_end
-                0x2001a5e0                __DATA_SHAREABLE_START = __data_shareable_start
-                0x080011c0                __INIT_DATA_SHAREABLE_START = __init_data_shareable_start
-                0x080011c0                __INIT_DATA_SHAREABLE_END = __init_data_shareable_end
-                0x20000010                __BSS_START = __bss_start__
-                0x20000030                __BSS_END = __bss_end__
-                0x200161b0                __BSS_NOCACHE_START = __bss_nocache_start
-                0x200161b0                __BSS_NOCACHE_END = __bss_nocache_end
-                0x2001a5e0                __BSS_SHAREABLE_START = __bss_shareable_start
-                0x2001a5e0                __BSS_SHAREABLE_END = __bss_shareable_end
-                0x08000b58                __INIT_TABLE = __init_table
-                0x08000b88                __INIT_TABLE_END = __init_table_end
-                0x08000b88                __ZERO_TABLE = __zero_table
-                0x08000ba0                __ZERO_TABLE_END = __zero_table_end
                 0x00000001                __RAM_INIT = 0x1
-                0x08000000                __ROM_CODE_START = ORIGIN (int_flash_c0)
-                0x2001a5e0                __RAM_SHAREABLE_START = ORIGIN (int_sram_shareable)
-                0x20013980                __RAM_STACK_START = ORIGIN (int_sram_stack_c0)
-                0x200157c0                __RAM_NO_CACHEABLE_START = ORIGIN (int_sram_no_cacheable_c0)
-                0x080f9f00                Fls_ACEraseRomStart = __acfls_code_rom_start
-                0x080f9f00                Fls_ACEraseRomEnd = __acfls_code_rom_end
-                0x00000000                Fls_ACEraseSize = ((__acfls_code_rom_end - __acfls_code_rom_start) / 0x4)
-                0x080f9f00                Fls_ACWriteRomStart = __acfls_code_rom_start
-                0x080f9f00                Fls_ACWriteRomEnd = __acfls_code_rom_end
-                0x00000000                Fls_ACWriteSize = ((__acfls_code_rom_end - __acfls_code_rom_start) / 0x4)
-                0x20013880                _ERASE_FUNC_ADDRESS_ = ADDR (.acfls_code_ram)
-                0x20013880                _WRITE_FUNC_ADDRESS_ = ADDR (.acfls_code_ram)
 OUTPUT(F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\compile\Gpio_TS_001.elf elf32-littlearm)
 LOAD linker stubs
 
