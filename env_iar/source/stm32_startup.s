@@ -122,7 +122,7 @@ ClearRegister:
 /* Gán giá trị VTOR_REG vào memory __vectortable_start */
 SetUpVtorRegister:
     LDR     R0, =VTOR_REG
-    LDR     R1, =__vectortable_start
+    LDR     R1, =VTABLE
     STR     R1, [R0]
     MOV     PC, LR
 
@@ -154,8 +154,8 @@ SRAM_End:
 
 /* Init Data */
 InitData:
-    LDR     R0, =__init_table
-    LDR     R6, =__init_table_end
+    LDR     R0, =__INIT_TABLE
+    LDR     R6, =__INIT_TABLE_END
     SUBS    R5, R6, R0 
     ADDS    R5, R5, #12
 SetaddRegionData:
@@ -182,8 +182,8 @@ InitData_End:
 
 /* Clear Bss */
 ClearBss:
-    LDR     R0, =__zero_table
-    LDR     R6, =__zero_table_end
+    LDR     R0, =__ZERO_TABLE
+    LDR     R6, =__ZERO_TABLE_END
     SUBS    R5, R6, R0
     ADDS    R5, R5, #8
 SetAddRegionBss:
@@ -212,7 +212,7 @@ ClearBss_End:
     EXTERN __Stack_end_c0
 
 VTABLE
-  DCD  __Stack_start_c0
+  DCD  __Stack_end_c0
   DCD Reset_Handler
   DCD NMI_Handler
   DCD HardFault_Handler
