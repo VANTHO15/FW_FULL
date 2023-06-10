@@ -8,9 +8,9 @@
     SECTION CSTACK:DATA:NOROOT(3)
 
     EXTERN  main
-    EXTERN __RAM_INIT
-    EXTERN __INT_SRAM_START
-    EXTERN __INT_SRAM_END
+    EXTERN RAM_INIT
+    EXTERN INT_SRAM_START
+    EXTERN INT_SRAM_END
     EXTERN vectortable$$Base
     EXTERN initvectortable$$Base
     EXTERN initvectortable$$Limit
@@ -71,7 +71,7 @@ Reset_Handler:
 	BL ClearRegister  
 
 	/* Reset core register */
-	BL SetUpVtorRegister
+	BL SetVtorRegister
 
 	/* Set stack register */
 	BL SetStack
@@ -117,7 +117,7 @@ ClearRegister:
     MOV     PC, LR
 
 /* Gán giá trị VTOR_REG vào memory __vectortable_start */
-SetUpVtorRegister:
+SetVtorRegister:
     LDR     R0, =VTOR_REG
     LDR     R1, =VTABLE
     STR     R1, [R0]
@@ -125,18 +125,18 @@ SetUpVtorRegister:
 
 /* set stack pointer Core0 cho MSP */
 SetStack:
-    LDR     r0, =__Stack_start_c0
+    LDR     r0, =Stack_start_c0
     MSR     MSP, r0
     MOV     PC, LR
 
 /* Ram Init */
 RamInit:
-    LDR     R0, =__RAM_INIT
+    LDR     R0, =RAM_INIT
     CMP     R0, #0
     /* Nếu __SRAM_INIT không bằng 0 thì bỏ qua */
     BEQ     SRAM_End
-    LDR     R1, =__INT_SRAM_START
-    LDR     R2, =__INT_SRAM_END
+    LDR     R1, =INT_SRAM_START
+    LDR     R2, =INT_SRAM_END
     SUBS    R2, R1
     SUBS    R2, #1 
     BLE     SRAM_End /* Nếu SUBS <= 0 thì nhảy */
@@ -207,10 +207,10 @@ ClearBss_End:
     THUMB
     SECTION .intvec:DATA:ROOT(2)
     PUBLIC VTABLE
-    EXTERN __Stack_start_c0
+    EXTERN Stack_start_c0
 
 VTABLE
-    DCD  __Stack_start_c0
+    DCD  Stack_start_c0
     DCD Reset_Handler
     DCD NMI_Handler
     DCD HardFault_Handler

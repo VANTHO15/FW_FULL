@@ -2,26 +2,26 @@
 .arch armv7-m
 
 .section ".init_table", "a"
-  .long __vectortable_start
-  .long __init_vectortable_start
-  .long __init_vectortable_end
-  .long __data_start
-  .long __init_data_start__
-  .long __init_data_end__
-  .long __data_nocache_start
-  .long __init_data_nocache_start
-  .long __init_data_nocache_end
-  .long __data_shareable_start
-  .long __init_data_shareable_start
-  .long __init_data_shareable_end
+  .long vectortable_start
+  .long init_vectortable_start
+  .long init_vectortable_end
+  .long data_start
+  .long init_data_start
+  .long init_data_end
+  .long data_nocache_start
+  .long init_data_nocache_start
+  .long init_data_nocache_end
+  .long data_shareable_start
+  .long init_data_shareable_start
+  .long init_data_shareable_end
 
 .section ".zero_table", "a"
-  .long __bss_start__
-  .long __bss_end__
-  .long __bss_nocache_start
-  .long __bss_nocache_end
-  .long __bss_shareable_start
-  .long __bss_shareable_end
+  .long bss_start
+  .long bss_end
+  .long bss_nocache_start
+  .long bss_nocache_end
+  .long bss_shareable_start
+  .long bss_shareable_end
 
 
 .section ".startup","ax"
@@ -86,27 +86,27 @@ ClearRegister:
     MOV     R12,#0
     MOV     PC, LR
 
-/* Gán giá trị VTOR_REG vào memory __vectortable_start */
+/* Gán giá trị VTOR_REG vào memory vectortable_start */
 SetUpVtorRegister:
     LDR     R0, =VTOR_REG
-    LDR     R1, =__vectortable_start
+    LDR     R1, =VTABLE
     STR     R1, [R0]
     MOV     PC, LR
 
 /* set stack pointer Core0 cho MSP */
 SetStack:
-    LDR     r0, =__Stack_start_c0
+    LDR     r0, =Stack_start_c0
     MSR     MSP, r0
     MOV     PC, LR
 
 /* Ram Init */
 RamInit:
-    LDR     R0, =__RAM_INIT
+    LDR     R0, =RAM_INIT
     CMP     R0, #0
-    /* Nếu __SRAM_INIT không bằng 0 thì bỏ qua */
+    /* Nếu SRAM_INIT không bằng 0 thì bỏ qua */
     BEQ     SRAM_End
-    LDR     R1, =__INT_SRAM_START
-    LDR     R2, =__INT_SRAM_END
+    LDR     R1, =INT_SRAM_START
+    LDR     R2, =INT_SRAM_END
     SUBS    R2, R1
     SUBS    R2, #1 
     BLE     SRAM_End /* Nếu SUBS <= 0 thì nhảy */
@@ -121,8 +121,8 @@ SRAM_End:
 
 /* Init Data */
 InitData:
-    LDR     R0, =__init_table
-    LDR     R6, =__init_table_end
+    LDR     R0, =init_table
+    LDR     R6, =init_table_end
     SUBS    R5, R6, R0 
     ADDS    R5, R5, #12
 SetaddRegionData:
@@ -149,8 +149,8 @@ InitData_End:
 
 /* Clear Bss */
 ClearBss:
-    LDR     R0, =__zero_table
-    LDR     R6, =__zero_table_end
+    LDR     R0, =zero_table
+    LDR     R6, =zero_table_end
     SUBS    R5, R6, R0
     ADDS    R5, R5, #8
 SetAddRegionBss:
@@ -182,7 +182,7 @@ ClearBss_End:
 .globl VTABLE_SIZE
 
 VTABLE:
-  .long  __Stack_start_c0
+  .long  Stack_start_c0
   .long Reset_Handler
   .long NMI_Handler
   .long HardFault_Handler

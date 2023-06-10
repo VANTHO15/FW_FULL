@@ -1,49 +1,49 @@
-define symbol __ICFEDIT_region_FLASH_C0_start__             = 0x08000000;
-define symbol __ICFEDIT_region_FLASH_C0_end__               = 0x080F9F00; 
+define symbol region_FLASH_C0_start             = 0x08000000;
+define symbol region_FLASH_C0_end               = 0x080F9F00; 
 
-define symbol __ICFEDIT_region_FLS_RSV_FLASH_C0_start__     = 0x080F9F00;
-define symbol __ICFEDIT_region_FLS_RSV_FLASH_C0_end__       = 0x080FA000; 
+define symbol region_FLS_RSV_FLASH_C0_start     = 0x080F9F00;
+define symbol region_FLS_RSV_FLASH_C0_end       = 0x080FA000; 
 
-define symbol __ICFEDIT_region_SRAM_C0_start__              = 0x20000000;
-define symbol __ICFEDIT_region_SRAM_C0_end__                = 0x20013880; 
+define symbol region_SRAM_C0_start              = 0x20000000;
+define symbol region_SRAM_C0_end                = 0x20013880; 
 
-define symbol __ICFEDIT_region_FLS_RSV_RAM_C0_start__       = 0x20013880;
-define symbol __ICFEDIT_region_FLS_RSV_RAM_C0_end__         = 0x20013980; 
+define symbol region_FLS_RSV_RAM_C0_start       = 0x20013880;
+define symbol region_FLS_RSV_RAM_C0_end         = 0x20013980; 
 
-define symbol __ICFEDIT_region_SRAM_STACK_C0_start__        = 0x20013980;
-define symbol __ICFEDIT_region_SRAM_STACK_C0_end__          = 0x200157C0; 
+define symbol region_SRAM_STACK_C0_start       = 0x20013980;
+define symbol region_SRAM_STACK_C0_end         = 0x200157C0; 
 
-define symbol __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_start__ = 0x200157C0;
-define symbol __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_end__   = 0x2001A5E0;
+define symbol region_SRAM_NO_CACHEABLE_C0_start = 0x200157C0;
+define symbol region_SRAM_NO_CACHEABLE_C0_end   = 0x2001A5E0;
 
-define symbol __ICFEDIT_region_SRAM_SHAREABLE_start__       = 0x2001A5E0;
-define symbol __ICFEDIT_region_SRAM_SHAREABLE_end__         = 0x2001F400; 
+define symbol region_SRAM_SHAREABLE_start       = 0x2001A5E0;
+define symbol region_SRAM_SHAREABLE_end         = 0x2001F400; 
 
-define symbol __ICFEDIT_region_SRAM_END_C0__                = 0x2001F400;
+define symbol region_SRAM_END_C0                = 0x2001F400;
 
-define exported symbol __Stack_end_c0      = __ICFEDIT_region_SRAM_STACK_C0_start__;
-define exported symbol __Stack_start_c0    = __ICFEDIT_region_SRAM_STACK_C0_end__;
+define exported symbol Stack_end_c0      = region_SRAM_STACK_C0_start;
+define exported symbol Stack_start_c0    = region_SRAM_STACK_C0_end;
 
-define exported symbol __RAM_INIT          = 1;
-define exported symbol __INT_SRAM_START    = __ICFEDIT_region_SRAM_C0_start__;
-define exported symbol __INT_SRAM_END      = __ICFEDIT_region_SRAM_END_C0__;
+define exported symbol RAM_INIT          = 1;
+define exported symbol INT_SRAM_START    = region_SRAM_C0_start;
+define exported symbol INT_SRAM_END      = region_SRAM_END_C0;
 
 /* Fls module access code support */
-define exported symbol Fls_ACEraseRomStart  = __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
-define exported symbol Fls_ACEraseRomEnd    = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ ;
-define exported symbol Fls_ACEraseSize      = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ - __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
+define exported symbol Fls_ACEraseRomStart  = region_FLS_RSV_FLASH_C0_start;
+define exported symbol Fls_ACEraseRomEnd    = region_FLS_RSV_FLASH_C0_end ;
+define exported symbol Fls_ACEraseSize      = region_FLS_RSV_FLASH_C0_end - region_FLS_RSV_FLASH_C0_start;
 
-define exported symbol Fls_ACWriteRomStart  = __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
-define exported symbol Fls_ACWriteRomEnd    = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ ;
-define exported symbol Fls_ACWriteSize      = __ICFEDIT_region_FLS_RSV_FLASH_C0_end__ - __ICFEDIT_region_FLS_RSV_FLASH_C0_start__;
+define exported symbol Fls_ACWriteRomStart  = region_FLS_RSV_FLASH_C0_start;
+define exported symbol Fls_ACWriteRomEnd    = region_FLS_RSV_FLASH_C0_end ;
+define exported symbol Fls_ACWriteSize      = region_FLS_RSV_FLASH_C0_end - region_FLS_RSV_FLASH_C0_start;
 
 define memory mem with size = 4G;
-define region int_flash_region         = mem:[from __ICFEDIT_region_FLASH_C0_start__ to __ICFEDIT_region_FLASH_C0_end__];
-define region int_flash_fls_rsv_region = mem:[from __ICFEDIT_region_FLS_RSV_FLASH_C0_start__ to __ICFEDIT_region_FLS_RSV_FLASH_C0_end__];
-define region int_sram_region          = mem:[from __ICFEDIT_region_SRAM_C0_start__ to __ICFEDIT_region_SRAM_C0_end__];
-define region int_sram_fls_rsv_region  = mem:[from __ICFEDIT_region_FLS_RSV_RAM_C0_start__ to __ICFEDIT_region_FLS_RSV_RAM_C0_end__];
-define region int_sram_no_cacheable    = mem:[from __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_start__ to __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_end__];
-define region int_sram_shareable       = mem:[from __ICFEDIT_region_SRAM_SHAREABLE_start__ to __ICFEDIT_region_SRAM_SHAREABLE_end__];
+define region int_flash_region         = mem:[from region_FLASH_C0_start to region_FLASH_C0_end];
+define region int_flash_fls_rsv_region = mem:[from region_FLS_RSV_FLASH_C0_start to region_FLS_RSV_FLASH_C0_end];
+define region int_sram_region          = mem:[from region_SRAM_C0_start to region_SRAM_C0_end];
+define region int_sram_fls_rsv_region  = mem:[from region_FLS_RSV_RAM_C0_start to region_FLS_RSV_RAM_C0_end];
+define region int_sram_no_cacheable    = mem:[from region_SRAM_NO_CACHEABLE_C0_start to region_SRAM_NO_CACHEABLE_C0_end];
+define region int_sram_shareable       = mem:[from region_SRAM_SHAREABLE_start to region_SRAM_SHAREABLE_end];
 
 initialize manually {
                      section .data,
@@ -95,7 +95,7 @@ place in int_sram_region          { block data, block bss };
 place in int_sram_no_cacheable    { block vectortable, block bss_nocache, block data_nocache };
 place in int_sram_shareable       { block data_sharable, block bss_sharable };
 
-define exported symbol __ROM_CODE_START          = __ICFEDIT_region_FLASH_C0_start__;
-define exported symbol __RAM_SHAREABLE_START     = __ICFEDIT_region_SRAM_SHAREABLE_start__;
-define exported symbol __RAM_STACK_START         = __ICFEDIT_region_SRAM_STACK_C0_start__;
-define exported symbol __RAM_NO_CACHEABLE_START  = __ICFEDIT_region_SRAM_NO_CACHEABLE_C0_start__;
+define exported symbol __ROM_CODE_START          = region_FLASH_C0_start;
+define exported symbol __RAM_SHAREABLE_START     = region_SRAM_SHAREABLE_start;
+define exported symbol __RAM_STACK_START         = region_SRAM_STACK_C0_start;
+define exported symbol __RAM_NO_CACHEABLE_START  = region_SRAM_NO_CACHEABLE_C0_start;

@@ -18,7 +18,7 @@ MEMORY
     ram_end_c0                 : ORIGIN = 0x2001F400, LENGTH = 0x00000000
 }
 
-HEAP_SIZE  = DEFINED(__heap_size__)  ? __heap_size__  : 0x00000200;
+HEAP_SIZE  = DEFINED(heap_size)  ? heap_size  : 0x00000200;
 
 SECTIONS
 {
@@ -35,15 +35,15 @@ SECTIONS
         *(.mcal_const_cfg)
         *(.mcal_const)
 
-        __init_table = .;
+        init_table = .;
         KEEP(*(.init_table))
         . = ALIGN(4);
-        __init_table_end = .;
+        init_table_end = .;
 
-        __zero_table = .;
+        zero_table = .;
         KEEP(*(.zero_table))
         . = ALIGN(4);
-        __zero_table_end = .;
+        zero_table_end = .;
 
         KEEP(*(.init))
         KEEP(*(.fini))
@@ -53,12 +53,12 @@ SECTIONS
     .flash_data :
     {
         . = ALIGN(4096);
-        __init_vectortable_start = .;
+        init_vectortable_start = .;
         KEEP(*(.intc_vector))
         . = ALIGN(4);
-        __init_vectortable_end = .;
+        init_vectortable_end = .;
 
-        __init_data_start__ = .;
+        init_data_start = .;
         *(.data)
         *(.data*)
         . = ALIGN(4);
@@ -66,47 +66,47 @@ SECTIONS
         . = ALIGN(4);
         *(.ramcode)
         . = ALIGN(4);
-        __init_data_end__ = .;
+        init_data_end = .;
 
-        __init_data_nocache_start = .;
+        init_data_nocache_start = .;
         *(.mcal_data_no_cacheable)
         . = ALIGN(4);
         *(.mcal_const_no_cacheable)
         . = ALIGN(4);
-        __init_data_nocache_end = .;
+        init_data_nocache_end = .;
 
-        __init_data_shareable_start = .;
+        init_data_shareable_start = .;
         *(.mcal_shared_data)
         . = ALIGN(4);
-        __init_data_shareable_end = .;
+        init_data_shareable_end = .;
     } > int_flash_c0
 
     .acfls_code_flash :
     {
-        __acfls_code_rom_start = .;
+        acfls_code_rom_start = .;
         *(.acfls_code_rom) 
         . = ALIGN(4);
-        __acfls_code_rom_end = .;
+        acfls_code_rom_end = .;
     } > int_flash_fls_rsv_c0
 
     .sram_data :
     {
-        __data_start = .;
-        . += __init_data_end__ - __init_data_start__;
+        data_start = .;
+        . += init_data_end - init_data_start;
         . = ALIGN(4);
-        __data_end = .;
+        data_end = .;
     } > int_sram_c0
 
     .sram_bss :
     {
         . = ALIGN(16);
-        __bss_start__  = .;
+        bss_start  = .;
         *(.bss)
         *(.bss*)
         . = ALIGN(16);
         *(.mcal_bss)
         . = ALIGN(4);
-        __bss_end__  = .;
+        bss_end  = .;
     } > int_sram_c0
 
     .heap (NOLOAD):
@@ -129,40 +129,40 @@ SECTIONS
     .sram_nocache :
     {
         . = ALIGN(4096);
-        __vectortable_start = .;
-        . += __init_vectortable_end - __init_vectortable_start;
+        vectortable_start = .;
+        . += init_vectortable_end - init_vectortable_start;
         . = ALIGN(4);
-        __vectortable_end = .;
+        vectortable_end = .;
 
-        __data_nocache_start = .;
-        . += __init_data_nocache_end - __init_data_nocache_start;
+        data_nocache_start = .;
+        . += init_data_nocache_end - init_data_nocache_start;
         . = ALIGN(4);
-        __data_nocache_end = .;
+        data_nocache_end = .;
 
-        __bss_nocache_start = .;
+        bss_nocache_start = .;
         *(.mcal_bss_no_cacheable)
         . = ALIGN(4);
-        __bss_nocache_end = .;
+        bss_nocache_end = .;
     } > int_sram_no_cacheable_c0
 
     .sram_shareable :
     {
-        __data_shareable_start = .;
-        . += __init_data_shareable_end - __init_data_shareable_start;
+        data_shareable_start = .;
+        . += init_data_shareable_end - init_data_shareable_start;
         . = ALIGN(4);
-        __data_shareable_end = .;
+        data_shareable_end = .;
         
-        __bss_shareable_start = .;
+        bss_shareable_start = .;
         *(.mcal_shared_bss )
         . = ALIGN(4);
-        __bss_shareable_end = .;
+        bss_shareable_end = .;
     } > int_sram_shareable
 
-    __Stack_end_c0              = ORIGIN(int_sram_stack_c0);
-    __Stack_start_c0            = ORIGIN(int_sram_stack_c0) + LENGTH(int_sram_stack_c0);
+    Stack_end_c0              = ORIGIN(int_sram_stack_c0);
+    Stack_start_c0            = ORIGIN(int_sram_stack_c0) + LENGTH(int_sram_stack_c0);
 
-    __INT_SRAM_START            = ORIGIN(int_sram_c0);
-    __INT_SRAM_END              = ORIGIN(ram_end_c0);
+    INT_SRAM_START            = ORIGIN(int_sram_c0);
+    INT_SRAM_END              = ORIGIN(ram_end_c0);
 
-    __RAM_INIT                  = 1;
+    RAM_INIT                  = 1;
 }
