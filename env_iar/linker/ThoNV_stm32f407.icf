@@ -5,12 +5,12 @@ define symbol region_FLS_RSV_FLASH_C0_start     = 0x080F9F00;
 define symbol region_FLS_RSV_FLASH_C0_end       = 0x080FA000; 
 
 define symbol region_SRAM_C0_start              = 0x20000000;
-define symbol region_SRAM_C0_end                = 0x20013880; 
+define symbol region_SRAM_C0_end                = 0x2000EA60; 
 
-define symbol region_FLS_RSV_RAM_C0_start       = 0x20013880;
-define symbol region_FLS_RSV_RAM_C0_end         = 0x20013980; 
+define symbol region_FLS_RSV_RAM_C0_start       = 0x2000EA60;
+define symbol region_FLS_RSV_RAM_C0_end         = 0x2000EB60; 
 
-define symbol region_SRAM_STACK_C0_start       = 0x20013980;
+define symbol region_SRAM_STACK_C0_start       = 0x2000EB60;
 define symbol region_SRAM_STACK_C0_end         = 0x200157C0; 
 
 define symbol region_SRAM_NO_CACHEABLE_C0_start = 0x200157C0;
