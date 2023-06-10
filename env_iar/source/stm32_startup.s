@@ -9,6 +9,7 @@
 
     EXTERN  main
     EXTERN RAM_INIT
+    EXTERN Stack_start_c0
     EXTERN INT_SRAM_START
     EXTERN INT_SRAM_END
     EXTERN vectortable$$Base
@@ -210,7 +211,7 @@ ClearBss_End:
     EXTERN Stack_start_c0
 
 VTABLE
-    DCD  Stack_start_c0
+    DCD Stack_start_c0
     DCD Reset_Handler
     DCD NMI_Handler
     DCD HardFault_Handler
