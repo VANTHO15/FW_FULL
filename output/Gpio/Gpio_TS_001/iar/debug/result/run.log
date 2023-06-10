@@ -8,7 +8,7 @@ Target.EraseChip();
 Jdebug script: OnProjectLoad is running
 No CPU register set description file specified, loading default: C:/Program Files/SEGGER/Ozone/Config/CPU/Cortex-M4F.svd.
 Project.AddSvdFile ("C:/Program Files/SEGGER/Ozone/Config/CPU/Cortex-M4F.svd");
-File.Open: completed in 156 ms
+File.Open: completed in 163 ms
 Program segments:
   Address         Size         Code      RO Data      RW Data      ZI Data    Flg
 ---------    ---------    ---------    ---------    ---------    ---------    ---
@@ -29,7 +29,7 @@ JTAG chain detection found 2 devices:
 JTAG Chain Identified. Connecting to DAP TAP...
 Successfully connected to selected DAP TAP.
 DAP initialized successfully.
-InitTarget() end - Took 8ms
+InitTarget() end - Took 9ms
 TotalIRLen = 9, IRPrint = 0x0011
 JTAG chain detection found 2 devices:
  #0 Id: 0x4BA00477, IRLen: 04, CoreSight JTAG-DP
@@ -76,10 +76,9 @@ Target.GetReg ("R15"); // returns 0x80002D4
 Debug.Continue();
 Jdebug script: AfterTargetHalt is running
 Target.GetReg ("R15"); // returns 0x80011C6
-Target.SaveMemory ("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\debug\result\dump.log", 0x2102000F, 0xA);
-Target.SaveMemory ("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\debug\result\dump.log", 0x2102000F, 0xA): Could not read target memory.
+Target.SaveMemory ("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\debug\result\dump.log", 0x2000000F, 0xA);
 Debug.Stop();
 OnDisconnectTarget() start
-OnDisconnectTarget() end - Took 0ms
+OnDisconnectTarget() end - Took 1ms
 Disconnected from target device.
 File.Exit();

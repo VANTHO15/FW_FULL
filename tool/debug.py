@@ -69,8 +69,8 @@ class Debug(CommonStep):
                 with open(self.MapFile, "r") as file:
                     MapFileData = file.read()
                     # re.findall Nó trả về một danh sách chứa tất cả các kết quả khớp của một mẫu trong chuỗi.
-                    ResultAddress = re.findall(ResultAddress_pattern , MapFileData)[0]
-                    EndTestAddress = re.findall(EndTestAddress_pattern , MapFileData)[0]
+                    ResultAddress = re.findall(ResultAddress_pattern , MapFileData)[0].replace("'", "")
+                    EndTestAddress = re.findall(EndTestAddress_pattern , MapFileData)[0].replace("'", "")
                 self.ElfFile = glob(os.path.join(self.Project, "*.elf"))[0]  
             except:
                 logging.error("Please check build step again")
@@ -103,8 +103,8 @@ class Debug(CommonStep):
         if os.path.exists(DebugFileOld):
             os.remove(DebugFileOld)
             
-        # with open(DebugFile, "w+") as file:
-        #     file.write(JdebugData)
+        with open(DebugFile, "w+") as file:
+            file.write(JdebugData)
         
         DebugOptions = [ '-project', DebugFile]
         Command = [self.mTest.OZONE_FILE] + DebugOptions
