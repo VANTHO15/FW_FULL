@@ -24,7 +24,10 @@ CC_OPTS = [
     '--no_mem_idioms',
     '-DI_CACHE_ENABLE',
     '--do_explicit_zero_opt_in_named_sections',
-    '--diag_suppress=Pa050'
+    '--diag_suppress=Pa050',
+    '-e',
+    '--require_prototypes',
+    '--no_wrap_diagnostics',
 ]
 
 LK_OPTS = [
@@ -41,7 +44,5 @@ LK_OPTS = [
     'MAP_FILE_REPLACE'
 ]
 AC_OPTS = [
-    # '--cpu=Cortex-M4',
-    # '--cpu_mode=thumb',
     '-r'
 ]
