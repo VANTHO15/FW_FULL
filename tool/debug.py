@@ -57,7 +57,7 @@ class Debug(CommonStep):
         EndTestAddress_pattern  = ""
         if self.mTest.DEBUGER == "ozone": 
             try:
-                if self.mTest.COMPILER == "gcc":
+                if self.mTest.COMPILER == "gcc" or self.mTest.COMPILER == "gcc_c":
                     ResultAddress_pattern  = "\s+(\w+)\s+TestCaseResult"
                     EndTestAddress_pattern  = "\s+(\w+)\s+ThoNVEnd"
                 elif self.mTest.COMPILER == "iar":
@@ -66,6 +66,7 @@ class Debug(CommonStep):
                 elif self.mTest.COMPILER == "ghs":
                     ResultAddress_pattern  = "\s+(\w+)\+\w+\sTestCaseResult"
                     EndTestAddress_pattern  = "\s+(\w+)\+\w+\sThoNVEnd"
+                print(ResultAddress_pattern)
                 with open(self.MapFile, "r") as file:
                     MapFileData = file.read()
                     # re.findall Nó trả về một danh sách chứa tất cả các kết quả khớp của một mẫu trong chuỗi.
@@ -73,7 +74,7 @@ class Debug(CommonStep):
                     EndTestAddress = re.findall(EndTestAddress_pattern , MapFileData)[0].replace("'", "")
                 self.ElfFile = glob(os.path.join(self.Project, "*.elf"))[0]  
             except:
-                logging.error("Please check build step again")
+                logging.error("Do not find pattern in Map file")
                 exit()
         if (self.mTest.JLINK_INTERFACE == "USB"):
             Temp = self.mTest.JLINK_SERIAL_NUMBER
@@ -84,7 +85,7 @@ class Debug(CommonStep):
                         "DEBUG_MODE_JDEBUG":str(self.Debug), "CONSOLE_FILE_JDEBUG":self.RunLogFile, "IF_TMP_JDEBUG": self.mTest.JLINK_INTERFACE,
                         "DEBUG_INTERFACE": self.mTest.DEBUGER_JTAG_SWD}
         
-        if self.mTest.COMPILER == "gcc":
+        if self.mTest.COMPILER == "gcc" or self.mTest.COMPILER == "gcc_c":
             with open(JDEBUG_FILE_GCC,"r") as file:
                 JdebugData = file.read()
         elif self.mTest.COMPILER == "iar":

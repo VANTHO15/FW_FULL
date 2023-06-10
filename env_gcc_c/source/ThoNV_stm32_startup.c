@@ -243,4 +243,8 @@ void Reset_Handler(void)
     }
 
     main();
+
+    __asm volatile(".globl ThoNVEnd");
+    __asm volatile("ThoNVEnd:");
+    __asm volatile("CMP R1,#1");
 }

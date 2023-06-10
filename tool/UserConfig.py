@@ -13,7 +13,7 @@ EB_DIR = "C:/EB/tresos"
 # Compile
 COMPILER_DIR_GCC = "C:/GCC_THO"
 COMPILER_DIR_IAR = "C:/Program Files (x86)/IAR Systems/Embedded Workbench 8.4/arm"
-COMPILER = "iar"   # gcc/iar/ghs
+COMPILER = "gcc_c"   # gcc/iar/ghs/gcc_c
 
 # Execute
 OZONE_FILE = "C:/Program Files/SEGGER/Ozone/Ozone.exe"
