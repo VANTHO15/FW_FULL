@@ -31,5 +31,4 @@ LK_OPTS = [
 ]
 AC_OPTS = [
     '-r',
-    'assembler-with-cpp'
 ]
