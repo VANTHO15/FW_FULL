@@ -9,8 +9,7 @@ BIN_COMPILE_OPTS= [
 ]
 
 HEX_COMPILE_OPTS = [
-    '-O',
-    'ihex'
+    '--ihex'
 ]
 
 CC_OPTS = [

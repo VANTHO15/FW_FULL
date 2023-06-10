@@ -17,9 +17,6 @@ void RESULT_RunAllTests(RESULT_TestSuite_t* TS)
         TS->TC_Ptr[Id]();
     }
 
-    // __asm volatile(".globl ThoNVEnd");
-    // __asm volatile("ThoNVEnd:");
-    // __asm volatile("CMP R1,#1");
 }
 
 void RESULT_Assert(uint8_t result)

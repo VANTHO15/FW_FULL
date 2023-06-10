@@ -1,17 +1,17 @@
 void OnProjectLoad (void) {
-  Project.SetConsoleLogFile("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\debug\result\run.log");
-  Project.SetDevice ("STM32F407VG");
-  Project.SetHostIF ("USB", "59768862");
-  Project.SetTargetIF ("JTAG");
+  Project.SetConsoleLogFile("CONSOLE_FILE_JDEBUG");
+  Project.SetDevice ("TARGET_JDEBUG");
+  Project.SetHostIF ("IF_TMP_JDEBUG", "HostIF_JDEBUG");
+  Project.SetTargetIF ("DEBUG_INTERFACE");
   Project.SetTIFSpeed ("4 MHz");
-  File.Open ("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\compile\Gpio_TS_001.elf");
+  File.Open ("ELF_FILE_JDEBUG");
   Target.EraseChip();
   Util.Log("Jdebug script: OnProjectLoad is running");
 }
 
 void OnStartupComplete (void) {
     Util.Log("Jdebug script: OnStartupComplete is running");
-    Break.Set(0x0800001e); // luôn có 1 breakpoint ở trong đầu hàm main, sau đó tạo breakpoint này để sau này nhảy tới sẽ dừng ở đây
+    Break.Set(END_OF_TEST_JDEBUG); // luôn có 1 breakpoint ở trong đầu hàm main, sau đó tạo breakpoint này để sau này nhảy tới sẽ dừng ở đây
 }
 
 void AfterTargetReset (void) {
@@ -62,11 +62,11 @@ void AfterTargetDownload (void) {
 
 void AfterTargetHalt (void) {
    
-    if(1){
+    if(DEBUG_MODE_JDEBUG){
         Util.Log("Jdebug script: AfterTargetHalt is running");
-        if(Target.GetReg("R15") == (0x0800001e)) 
+        if(Target.GetReg("R15") == (END_OF_TEST_JDEBUG - 1)) 
         {
-            Target.SaveMemory("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\gcc\debug\result\dump.log", 0x20000014 - 1, 10); // TestCaseResult[10]
+            Target.SaveMemory("DUMP_FILE", RESULT_ADDRESS_JDEBUG - 1, 10); // TestCaseResult[10]
             Debug.Stop();
             File.Exit();
         }

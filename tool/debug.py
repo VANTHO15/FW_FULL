@@ -32,7 +32,8 @@ def Read_argument():
 # Đoạn code trên xác định quy tắc RegEx: bất kỳ chuỗi nào có năm chữ cái, bắt đầu bằng a và kết thúc bằng s.
 import re
 
-JDEBUG_FILE = r'debug.jdebug'
+JDEBUG_FILE_GCC = r'debug_gcc.jdebug'
+JDEBUG_FILE_IAR = r'debug_iar.jdebug'
 
 class Debug(CommonStep):
     def __init__(self, mTest, Debug):
@@ -56,8 +57,15 @@ class Debug(CommonStep):
         EndTestAddress_pattern  = ""
         if self.mTest.DEBUGER == "ozone": 
             try:
-                ResultAddress_pattern  = "\s+(\w+)\s+TestCaseResult"
-                EndTestAddress_pattern  = "\s+(\w+)\s+ThoNVEnd"
+                if self.mTest.COMPILER == "gcc":
+                    ResultAddress_pattern  = "\s+(\w+)\s+TestCaseResult"
+                    EndTestAddress_pattern  = "\s+(\w+)\s+ThoNVEnd"
+                elif self.mTest.COMPILER == "iar":
+                    ResultAddress_pattern  = "TestCaseResult\s*(0x\S*)"
+                    EndTestAddress_pattern  = "ThoNVEnd\s*(0x\S*)"
+                elif self.mTest.COMPILER == "ghs":
+                    ResultAddress_pattern  = "\s+(\w+)\+\w+\sTestCaseResult"
+                    EndTestAddress_pattern  = "\s+(\w+)\+\w+\sThoNVEnd"
                 with open(self.MapFile, "r") as file:
                     MapFileData = file.read()
                     # re.findall Nó trả về một danh sách chứa tất cả các kết quả khớp của một mẫu trong chuỗi.
@@ -75,8 +83,17 @@ class Debug(CommonStep):
                         "END_OF_TEST_JDEBUG": EndTestAddress,"DUMP_FILE": self.DumpFile,"RESULT_ADDRESS_JDEBUG": ResultAddress,
                         "DEBUG_MODE_JDEBUG":str(self.Debug), "CONSOLE_FILE_JDEBUG":self.RunLogFile, "IF_TMP_JDEBUG": self.mTest.JLINK_INTERFACE,
                         "DEBUG_INTERFACE": self.mTest.DEBUGER_JTAG_SWD}
-        with open(JDEBUG_FILE,"r") as file:
-            JdebugData = file.read()
+        
+        if self.mTest.COMPILER == "gcc":
+            with open(JDEBUG_FILE_GCC,"r") as file:
+                JdebugData = file.read()
+        elif self.mTest.COMPILER == "iar":
+            with open(JDEBUG_FILE_IAR,"r") as file:
+                JdebugData = file.read()
+        elif self.mTest.COMPILER == "ghs":
+            with open(JDEBUG_FILE_GCC,"r") as file:
+                JdebugData = file.read()
+        
         for key,value in LIST_REP.items():
             JdebugData = JdebugData.replace(key,value)
 
@@ -86,8 +103,8 @@ class Debug(CommonStep):
         if os.path.exists(DebugFileOld):
             os.remove(DebugFileOld)
             
-        with open(DebugFile, "w+") as file:
-            file.write(JdebugData)
+        # with open(DebugFile, "w+") as file:
+        #     file.write(JdebugData)
         
         DebugOptions = [ '-project', DebugFile]
         Command = [self.mTest.OZONE_FILE] + DebugOptions
