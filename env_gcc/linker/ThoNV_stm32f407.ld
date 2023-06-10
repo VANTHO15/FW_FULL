@@ -10,11 +10,11 @@ MEMORY
     int_flash_c0               : ORIGIN = 0x08000000, LENGTH = 0x000F9F00    /* 1792K - 256b */
     int_flash_fls_rsv_c0       : ORIGIN = 0x080F9F00, LENGTH = 0x00000100    /* 0.1K */
 
-    int_sram_c0                : ORIGIN = 0x20000000, LENGTH = 0x0000EA60    /* 60K */
-    int_sram_fls_rsv_c0        : ORIGIN = 0x2000EA60, LENGTH = 0x00000100    /* 0.1K */
-	int_sram_stack_c0          : ORIGIN = 0x2000EB60, LENGTH = 0x00006C60    /* 27744  */
-    int_sram_no_cacheable_c0   : ORIGIN = 0x200157C0, LENGTH = 0x00004E20    /* 20KB */
-    int_sram_shareable         : ORIGIN = 0x2001A5E0, LENGTH = 0x00004E20    /* 20KB */
+    int_sram_c0                : ORIGIN = 0x20000000, LENGTH = 0x00013880    /* 80K */
+    int_sram_fls_rsv_c0        : ORIGIN = 0x20013880, LENGTH = 0x00000100    /* 0.1K */
+	int_sram_stack_c0          : ORIGIN = 0x20013980, LENGTH = 0x00006C60    /* 27744  */
+    int_sram_no_cacheable_c0   : ORIGIN = 0x2001A5E0, LENGTH = 0x00002710    /* 10KB */
+    int_sram_shareable         : ORIGIN = 0x2001CCF0, LENGTH = 0x00002710    /* 10KB */
     ram_end_c0                 : ORIGIN = 0x2001F400, LENGTH = 0x00000000
 }
 

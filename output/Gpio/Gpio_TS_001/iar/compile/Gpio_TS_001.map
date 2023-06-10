@@ -1,0 +1,408 @@
+﻿###############################################################################
+#
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  11/Jun/2023  00:05:11
+# Copyright 2007-2020 IAR Systems AB.
+#
+#    Output file  =
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.elf
+#    Map file     =
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.map
+#    Command line =
+#        --cpu=Cortex-M4 --entry=Reset_Handler --config
+#        F:/IAR/FW_THO/FW_THO/FW_HuLa-master/tool/../env_iar/linker/ThoNV_stm32f407.icf
+#        --map
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.map
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\stm32f407xx_gpio_driver.o
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\stm32_startup.o
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.o
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TC_001.o
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TC_002.o
+#        -o
+#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.elf
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because some modules are built with
+size limitations (and not runtime checking), and --advanced_heap
+was not specified.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+define block startupBlock
+   with fixed order {
+      section .core_loop, section .startup, section .systeminit };
+define block codeBlock
+   with fixed order {
+      section .text, section .mcal_text, section .acmcu_code_rom };
+define block roBlock
+   with fixed order {
+      section .rodata, section .mcal_const_cfg, section .mcal_const };
+define block initBlock
+   with fixed order {
+      section .init_table, section .zero_table, section .iar.* };
+"P1":  place in [from 0x800'0000 to 0x80f'9f00] {
+          block startupBlock, block codeBlock, block roBlock, block initBlock };
+define block initvectortable
+   with fixed order, alignment = 4K { section .intvec_init };
+"P2":  place in [from 0x800'0000 to 0x80f'9f00] { block initvectortable };
+define block initdata
+   with fixed order, alignment = 4 {
+      section .data_init, section .mcal_data_init, section .ramcode_init };
+define block initdata_nocache
+   with fixed order, alignment = 4 {
+      section .mcal_data_no_cacheable_init,
+      section .mcal_const_no_cacheable_init };
+define block initdata_sharable
+   with fixed order, alignment = 4 { section .mcal_shared_data_init };
+"P3":  place in [from 0x800'0000 to 0x80f'9f00] {
+          block initdata, block initdata_nocache, block initdata_sharable };
+define block data
+   with fixed order, alignment = 4 {
+      section .data, section .mcal_data, section .ramcode };
+define block bss
+   with fixed order, alignment = 4 { section .bss, section .mcal_bss };
+"P5":  place in [from 0x2000'0000 to 0x2001'3880] { block data, block bss };
+define block vectortable with fixed order, alignment = 4K { section .intvec };
+define block bss_nocache
+   with fixed order, alignment = 4 { section .mcal_bss_no_cacheable };
+define block data_nocache
+   with fixed order, alignment = 4 {
+      section .mcal_data_no_cacheable, section .mcal_const_no_cacheable };
+"P6":  place in [from 0x2001'a5e0 to 0x2001'ccf0] {
+          block vectortable, block bss_nocache, block data_nocache };
+define block data_sharable
+   with fixed order, alignment = 4 { section .mcal_shared_data };
+define block bss_sharable
+   with fixed order, alignment = 4 { section .mcal_shared_bss };
+"P7":  place in [from 0x2001'ccf0 to 0x2001'f400] {
+          block data_sharable, block bss_sharable };
+do not initialize {
+   section .bss, section .mcal_bss, section .mcal_bss_no_cacheable,
+   section .mcal_shared_bss, section .data, section .mcal_data,
+   section .mcal_data_no_cacheable, section .mcal_shared_data,
+   section .mcal_const_no_cacheable, section .ramcode };
+initialize manually with packing = copy, complex ranges {
+   section .data, section .mcal_data, section .mcal_data_no_cacheable,
+   section .mcal_const_no_cacheable, section .ramcode, section .intvec };
+
+No sections matched the following patterns:
+
+  section .acfls_code_rom                in block AppACFLSCode
+  section .acmcu_code_rom                in block codeBlock
+  section .core_loop                     in block startupBlock
+  section .iar.*                         in block initBlock
+  section .mcal_bss                      in block bss
+  section .mcal_bss_no_cacheable         in block bss_nocache
+  section .mcal_const                    in block roBlock
+  section .mcal_const_cfg                in block roBlock
+  section .mcal_const_no_cacheable       in block data_nocache
+  section .mcal_const_no_cacheable_init  in block initdata_nocache
+  section .mcal_data                     in block data
+  section .mcal_data_init                in block initdata
+  section .mcal_data_no_cacheable        in block data_nocache
+  section .mcal_data_no_cacheable_init   in block initdata_nocache
+  section .mcal_shared_bss               in block bss_sharable
+  section .mcal_shared_data              in block data_sharable
+  section .mcal_shared_data_init         in block initdata_sharable
+  section .mcal_text                     in block codeBlock
+  section .ramcode                       in block data
+  section .ramcode_init                  in block initdata
+  section .rodata                        in block roBlock
+  section .systeminit                    in block startupBlock
+
+
+  Section              Kind         Address    Size  Object
+  -------              ----         -------    ----  ------
+"P1-P3", part 1 of 2:                        0x1308
+  codeBlock                      0x800'0000   0x55a  <Block>
+    .text              ro code   0x800'0000   0x28c  stm32f407xx_gpio_driver.o [1]
+    .text              ro code   0x800'028c    0x58  Gpio_TS_001.o [1]
+    .text              ro code   0x800'02e4    0x3a  ABImemset48.o [2]
+    .text              ro code   0x800'0320    0xc4  Gpio_TC_001.o [1]
+    .text              ro code   0x800'03e4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'03e8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'03ec     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'03f0     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'03f4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'03f8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'03fc     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0400     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0404     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0408     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'040c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0410     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0414     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0418     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'041c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0420     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0424     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0428     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'042c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0430     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0434     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0438     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'043c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0440     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0444     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0448     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'044c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0450     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0454     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0458     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'045c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0460     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0464     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0468     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'046c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0470     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0474     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0478     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'047c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0480     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0484     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0488     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'048c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0490     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0494     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0498     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'049c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04a0     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04a4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04a8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04ac     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04b0     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04b4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04b8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04bc     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04c0     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04c4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04c8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04cc     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04d0     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04d4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04d8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04dc     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04e0     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04e4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04e8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04ec     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04f0     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04f4     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04f8     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'04fc     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0500     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0504     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0508     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'050c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0510     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0514     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0518     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'051c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0520     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0524     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0528     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'052c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0530     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0534     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0538     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'053c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0540     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0544     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0548     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'054c     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0550     0x4  stm32_startup.o [1]
+    .text              ro code   0x800'0554     0x6  Gpio_TC_002.o [1]
+  initvectortable                0x800'1000   0x1a8  <Block>
+    Initializer bytes  const     0x800'1000   0x1a8  <for section .intvec-1>
+  startupBlock                   0x800'11a8   0x100  <Block>
+    .startup           ro code   0x800'11a8   0x100  stm32_startup.o [1]
+  initBlock                      0x800'12b0    0x48  <Block>
+    .init_table        const     0x800'12b0    0x30  stm32_startup.o [1]
+    .zero_table        const     0x800'12e0    0x18  stm32_startup.o [1]
+  initdata                       0x800'12f8    0x10  <Block>
+    Initializer bytes  const     0x800'12f8    0x10  <for section .data-1>
+                               - 0x800'1308  0x1308
+
+"P1-P3", part 2 of 2:                           0x0
+  initdata_nocache               0x800'1308     0x0  <Block>
+  initdata_sharable              0x800'1308     0x0  <Block>
+
+"P5", part 1 of 2:                             0x10
+  data                          0x2000'0000    0x10  <Block>
+    section .data-1             0x2000'0000    0x10  <Init block>
+      .data            inited   0x2000'0000     0x8  Gpio_TS_001.o [1]
+      .data            inited   0x2000'0008     0x8  Gpio_TS_001.o [1]
+                              - 0x2000'0010    0x10
+
+"P5", part 2 of 2:                             0x1d
+  bss                           0x2000'0010    0x1d  <Block>
+    .bss               uninit   0x2000'0010    0x10  Gpio_TS_001.o [1]
+    .bss               uninit   0x2000'0020     0xd  Gpio_TC_001.o [1]
+                              - 0x2000'002d    0x1d
+
+"P6", part 1 of 2:                            0x1a8
+  vectortable                   0x2001'b000   0x1a8  <Block>
+    section .intvec-1           0x2001'b000   0x1a8  <Init block>
+      .intvec          inited   0x2001'b000   0x1a8  stm32_startup.o [1]
+                              - 0x2001'b1a8   0x1a8
+
+"P6", part 2 of 2:                              0x0
+  bss_nocache                   0x2001'b1a8     0x0  <Block>
+  data_nocache                  0x2001'b1a8     0x0  <Block>
+
+"P7":                                           0x0
+  data_sharable                 0x2001'ccf4     0x0  <Block>
+  bss_sharable                  0x2001'ccf4     0x0  <Block>
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+   0x800'1308   0x80f'9f00  0xf'8bf9
+  0x2000'002d  0x2001'3880  0x1'3854
+  0x2001'a5e0  0x2001'afff     0xa20
+  0x2001'b1a8  0x2001'ccf3    0x1b4c
+  0x2001'ccf4  0x2001'f400    0x270d
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                     ro code  ro data  rw data
+    ------                     -------  -------  -------
+command line/config:
+    ----------------------------------------------------
+    Total:
+
+F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile: [1]
+    Gpio_TC_001.o                  196                13
+    Gpio_TC_002.o                    6
+    Gpio_TS_001.o                   88       16       32
+    stm32_startup.o                624      496      424
+    stm32f407xx_gpio_driver.o      652
+    ----------------------------------------------------
+    Total:                       1'566      512      469
+
+rt7M_tl.a: [2]
+    ABImemset48.o                   58
+    ----------------------------------------------------
+    Total:                          58
+
+    Gaps                             2
+--------------------------------------------------------
+    Grand Total:                 1'626      512      469
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+Array_TC_OF_TS          0x2000'0000    0x8  Data  Gb  Gpio_TS_001.o [1]
+Fls_ACEraseRomEnd {Abs}
+                         0x80f'a000         Data  Gb  <internal module>
+Fls_ACEraseRomStart {Abs}
+                         0x80f'9f00         Data  Gb  <internal module>
+Fls_ACEraseSize {Abs}         0x100         Data  Gb  <internal module>
+Fls_ACWriteRomEnd {Abs}
+                         0x80f'a000         Data  Gb  <internal module>
+Fls_ACWriteRomStart {Abs}
+                         0x80f'9f00         Data  Gb  <internal module>
+Fls_ACWriteSize {Abs}         0x100         Data  Gb  <internal module>
+GPIO_Init                0x800'009b  0x174  Code  Gb  stm32f407xx_gpio_driver.o [1]
+GPIO_PeriClockControl    0x800'0001   0x9a  Code  Gb  stm32f407xx_gpio_driver.o [1]
+GPIO_ToggleOutputPin     0x800'024b    0xe  Code  Gb  stm32f407xx_gpio_driver.o [1]
+GPIO_WriteToOutputPin    0x800'0235   0x16  Code  Gb  stm32f407xx_gpio_driver.o [1]
+GpioLed                 0x2000'0020    0xc  Data  Gb  Gpio_TC_001.o [1]
+Gpio_TC_001              0x800'0323   0xa6  Code  Gb  Gpio_TC_001.o [1]
+Gpio_TC_002              0x800'0555    0x6  Code  Gb  Gpio_TC_002.o [1]
+INT_SRAM_END {Abs}      0x2001'f400         Data  Gb  <internal module>
+INT_SRAM_START {Abs}    0x2000'0000         Data  Gb  <internal module>
+Id                      0x2000'0010    0x1  Data  Gb  Gpio_TS_001.o [1]
+RAM_INIT {Abs}                  0x1         Data  Gb  <internal module>
+RESULT_Assert            0x800'02c1    0xe  Code  Gb  Gpio_TS_001.o [1]
+RESULT_RunAllTests       0x800'028d   0x34  Code  Gb  Gpio_TS_001.o [1]
+Reset_Handler            0x800'11a9         Code  Wk  stm32_startup.o [1]
+Stack_end_c0 {Abs}      0x2001'3980         Data  Gb  <internal module>
+Stack_start_c0 {Abs}    0x2001'a5e0         Data  Gb  <internal module>
+THONV_TS_STRUCT         0x2000'0008    0x8  Data  Gb  Gpio_TS_001.o [1]
+TestCaseResult          0x2000'0014    0xc  Data  Gb  Gpio_TS_001.o [1]
+ThoNVEnd                 0x800'11c7         Code  Gb  stm32_startup.o [1]
+VTABLE                  0x2001'b000         Data  Gb  stm32_startup.o [1]
+__INIT_TABLE             0x800'12b0         Data  Gb  stm32_startup.o [1]
+__RAM_NO_CACHEABLE_START {Abs}
+                        0x2001'a5e0         Data  Gb  <internal module>
+__RAM_SHAREABLE_START {Abs}
+                        0x2001'ccf0         Data  Gb  <internal module>
+__RAM_STACK_START {Abs}
+                        0x2001'3980         Data  Gb  <internal module>
+__ROM_CODE_START {Abs}   0x800'0000         Data  Gb  <internal module>
+__ZERO_TABLE             0x800'12e0         Data  Gb  stm32_startup.o [1]
+__aeabi_memset4          0x800'02e5         Code  Gb  ABImemset48.o [2]
+__aeabi_memset8          0x800'02e5         Code  Gb  ABImemset48.o [2]
+__iar_Memset4_word       0x800'02ed         Code  Gb  ABImemset48.o [2]
+__iar_Memset8_word       0x800'02ed         Code  Gb  ABImemset48.o [2]
+_start                   0x800'11a9         Code  Gb  stm32_startup.o [1]
+bss$$Base               0x2000'0010          --   Gb  - Linker created -
+bss$$Limit              0x2000'002d          --   Gb  - Linker created -
+bss_nocache$$Base       0x2001'b1a8          --   Gb  - Linker created -
+bss_nocache$$Limit      0x2001'b1a8          --   Gb  - Linker created -
+bss_sharable$$Base      0x2001'ccf4          --   Gb  - Linker created -
+bss_sharable$$Limit     0x2001'ccf4          --   Gb  - Linker created -
+codeBlock$$Base          0x800'0000          --   Gb  - Linker created -
+codeBlock$$Limit         0x800'055a          --   Gb  - Linker created -
+count                   0x2000'002c    0x1  Data  Gb  Gpio_TC_001.o [1]
+data$$Base              0x2000'0000          --   Gb  - Linker created -
+data$$Limit             0x2000'0010          --   Gb  - Linker created -
+data_nocache$$Base      0x2001'b1a8          --   Gb  - Linker created -
+data_nocache$$Limit     0x2001'b1a8          --   Gb  - Linker created -
+data_sharable$$Base     0x2001'ccf4          --   Gb  - Linker created -
+data_sharable$$Limit    0x2001'ccf4          --   Gb  - Linker created -
+delay                    0x800'0321    0x2  Code  Gb  Gpio_TC_001.o [1]
+initBlock$$Base          0x800'12b0          --   Gb  - Linker created -
+initBlock$$Limit         0x800'12f8          --   Gb  - Linker created -
+initdata$$Base           0x800'12f8          --   Gb  - Linker created -
+initdata$$Limit          0x800'1308          --   Gb  - Linker created -
+initdata_nocache$$Base   0x800'1308          --   Gb  - Linker created -
+initdata_nocache$$Limit
+                         0x800'1308          --   Gb  - Linker created -
+initdata_sharable$$Base
+                         0x800'1308          --   Gb  - Linker created -
+initdata_sharable$$Limit
+                         0x800'1308          --   Gb  - Linker created -
+initvectortable$$Base    0x800'1000          --   Gb  - Linker created -
+initvectortable$$Limit   0x800'11a8          --   Gb  - Linker created -
+main                     0x800'02cf    0xc  Code  Gb  Gpio_TS_001.o [1]
+startupBlock$$Base       0x800'11a8          --   Gb  - Linker created -
+startupBlock$$Limit      0x800'12a8          --   Gb  - Linker created -
+vectortable$$Base       0x2001'b000          --   Gb  - Linker created -
+vectortable$$Limit      0x2001'b1a8          --   Gb  - Linker created -
+
+
+[1] = F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile
+[2] = rt7M_tl.a
+
+  1'626 bytes of readonly  code memory
+    512 bytes of readonly  data memory
+    469 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

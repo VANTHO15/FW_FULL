@@ -1,0 +1,93 @@
+Project.SetDevice ("STM32F407VG");
+Target core support plugin loaded.: C:/Program Files/SEGGER/Ozone/Plugins/Core/CorePluginARM.dll
+Project.SetHostIF ("USB", "59768862");
+Project.SetTargetIF ("JTAG");
+Project.SetTIFSpeed ("4 MHz");
+File.Open ("F:/IAR/FW_THO/FW_THO/FW_HuLa-master/output/Gpio/Gpio_TS_001/iar/compile/Gpio_TS_001.elf");
+Target.EraseChip();
+Jdebug script: OnProjectLoad is running
+No CPU register set description file specified, loading default: C:/Program Files/SEGGER/Ozone/Config/CPU/Cortex-M4F.svd.
+Project.AddSvdFile ("C:/Program Files/SEGGER/Ozone/Config/CPU/Cortex-M4F.svd");
+File.Open: completed in 166 ms
+Program segments:
+  Address         Size         Code      RO Data      RW Data      ZI Data    Flg
+---------    ---------    ---------    ---------    ---------    ---------    ---
+ 08000000        4 872        4 872            0            0            0    R E
+---------    ---------    ---------    ---------    ---------    ---------    ---
+   Total:        4 872        4 872            0            0            0
+---------    ---------    ---------    ---------    ---------    ---------    ---
+For further information on ELF file data sections, execute command Elf.PrintSectionInfo(0).
+Debug.ReadIntoInstCache: updated instruction information within 1 code ranges (0x08000000-0x08001308)
+Debug.Start();
+Device "STM32F407VG" selected.
+InitTarget() start
+JTAG selected. Identifying JTAG Chain...
+TotalIRLen = 9, IRPrint = 0x0011
+JTAG chain detection found 2 devices:
+ #0 Id: 0x4BA00477, IRLen: 04, CoreSight JTAG-DP
+ #1 Id: 0x06431041, IRLen: 05, STM32 Boundary Scan
+JTAG Chain Identified. Connecting to DAP TAP...
+Successfully connected to selected DAP TAP.
+DAP initialized successfully.
+Can not attach to CPU. Trying connect under reset.
+JTAG selected. Identifying JTAG Chain...
+TotalIRLen = 9, IRPrint = 0x0011
+JTAG chain detection found 2 devices:
+ #0 Id: 0x4BA00477, IRLen: 04, CoreSight JTAG-DP
+ #1 Id: 0x06431041, IRLen: 05, STM32 Boundary Scan
+JTAG Chain Identified. Connecting to DAP TAP...
+Successfully connected to selected DAP TAP.
+DAP initialized successfully.
+InitTarget() end - Took 688ms
+TotalIRLen = 9, IRPrint = 0x0011
+JTAG chain detection found 2 devices:
+ #0 Id: 0x4BA00477, IRLen: 04, CoreSight JTAG-DP
+ #1 Id: 0x06431041, IRLen: 05, STM32 Boundary Scan
+DPv0 detected
+Scanning AP map to find all available APs
+AP[1]: Stopped AP scan as end of AP map has been reached
+AP[0]: AHB-AP (IDR: 0x24770011)
+Iterating through AP map to find AHB-AP to use
+AP[0]: Core found
+AP[0]: AHB-AP ROM base: 0xE00FF000
+CPUID register: 0x410FC241. Implementer code: 0x41 (ARM)
+Found Cortex-M4 r0p1, Little endian.
+FPUnit: 6 code (BP) slots and 2 literal slots
+CoreSight components:
+ROMTbl[0] @ E00FF000
+[0][0]: E000E000 CID B105E00D PID 000BB00C SCS-M7
+[0][1]: E0001000 CID B105E00D PID 003BB002 DWT
+[0][2]: E0002000 CID B105E00D PID 002BB003 FPB
+[0][3]: E0000000 CID B105E00D PID 003BB001 ITM
+[0][4]: E0040000 CID B105900D PID 000BB9A1 TPIU
+[0][5]: E0041000 CID B105900D PID 000BB925 ETM
+Connected to target device.
+Reset: Halt core after reset via DEMCR.VC_CORERESET.
+Reset: Reset device via AIRCR.SYSRESETREQ.
+Jdebug script: AfterTargetReset is running
+Elf.GetBaseAddr(); // returns 0x8000000
+Target.ReadU32 (0x08000000); // returns 0x4, data is 0xD1492901
+Target.SetReg ("SP", 0xD1492901);
+Elf.GetEntryPointPC(); // returns 0x80011A8
+Target.SetReg ("PC", 0x80011A8);
+J-Link: Flash download: Bank 0 @ 0x08000000: Skipped. Contents already match
+Jdebug script: AfterTargetDownload is running
+Elf.GetBaseAddr(); // returns 0x8000000
+Target.ReadU32 (0x08000000); // returns 0x4, data is 0xD1492901
+Target.SetReg ("SP", 0xD1492901);
+Elf.GetEntryPointPC(); // returns 0x80011A8
+Target.SetReg ("PC", 0x80011A8);
+Startup complete (PC=0x080002CE)
+Jdebug script: OnStartupComplete is running
+Break.Set (0x080011C7);
+Jdebug script: AfterTargetHalt is running
+Target.GetReg ("R15"); // returns 0x80002CE
+Debug.Continue();
+Jdebug script: AfterTargetHalt is running
+Target.GetReg ("R15"); // returns 0x80011C6
+Target.SaveMemory ("F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\debug\result\dump.log", 0x20000013, 0xA);
+Debug.Stop();
+OnDisconnectTarget() start
+OnDisconnectTarget() end - Took 1ms
+Disconnected from target device.
+File.Exit();
