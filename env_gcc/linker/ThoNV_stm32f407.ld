@@ -165,4 +165,6 @@ SECTIONS
     INT_SRAM_END              = ORIGIN(ram_end_c0);
 
     RAM_INIT                  = 1;
+
+    __ENTRY_VTABLE            = vectortable_start;
 }

@@ -99,3 +99,5 @@ define exported symbol __ROM_CODE_START          = region_FLASH_C0_start;
 define exported symbol __RAM_SHAREABLE_START     = region_SRAM_SHAREABLE_start;
 define exported symbol __RAM_STACK_START         = region_SRAM_STACK_C0_start;
 define exported symbol __RAM_NO_CACHEABLE_START  = region_SRAM_NO_CACHEABLE_C0_start;
+
+define exported symbol __ENTRY_VTABLE = start(int_sram_region);
