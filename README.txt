@@ -2,6 +2,7 @@
 # Python 3.10: https://drive.google.com/file/d/1-PNdtbIVFUpo6pi8RJAGkovRW8Jz9U9S/view?usp=sharing
 # Ozone Jlink: https://drive.google.com/file/d/1um2XMeeqVrluA7x6qWdEM6Fi-dvxP7P6/view?usp=sharing
 # https://drive.google.com/file/d/1zUmQSWwDy1BDzhRutPvFbI3raQdl6tFV/view?usp=sharing
+# Ozone Jlink Portable: https://drive.google.com/file/d/1izLmUuYhNdI24XyCv88GU8Kpki5jrcnp/view
 
 B1: 
 + Vào UserConfig.py và config lai đường dẫn theo máy tính của mình 

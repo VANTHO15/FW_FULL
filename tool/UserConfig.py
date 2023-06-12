@@ -16,13 +16,13 @@ COMPILER_DIR_IAR = "C:/Program Files (x86)/IAR Systems/Embedded Workbench 8.4/ar
 COMPILER = "iar"   # gcc/iar/ghs/gcc_c
 
 # Execute
-OZONE_FILE = "C:/Program Files/SEGGER/Ozone/Ozone.exe"
+OZONE_FILE = "C:/Tool/Portable_Ozone_Jlink/OzoneV3.26h/OzoneV3.26h/Ozone.exe"
 JLINK_INTERFACE = "USB" # IP  USB
 JLINK_SERIAL_NUMBER = "59768862"  # If JLINK_INTERFACE = USB
 JLINK_IP = "192.168.1.6" # If JLINK_INTERFACE = IP
 DEVICE = "STM32F407VG"
 DEBUGER_JTAG_SWD = "JTAG"
-JLINK_FILE = 'C:/Tool/Jlink/JLink/JLink.exe'
+JLINK_FILE = 'C:/Tool/Portable_Ozone_Jlink/JLink_V770e/JLink.exe'
 PYTHON_DIR = 'C:/Python310'
 #======================================= End User Config ==============================
 
