@@ -23,7 +23,7 @@ void RESULT_Assert(uint8_t result)
 {
     if(!result)
     {
-        /*  Test True */
+        /*  Test False */
         TestCaseResult[Id] = 0;
     }
 }
