@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00046.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>EcuC</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-CONFIGURATION-VALUES>
+          <SHORT-NAME>EcuC</SHORT-NAME>
+          <DEFINITION-REF DEST="ECUC-MODULE-DEF">/HuLa/EcuC</DEFINITION-REF>
+          <IMPLEMENTATION-CONFIG-VARIANT>VARIANT-POST-BUILD</IMPLEMENTATION-CONFIG-VARIANT>
+          <CONTAINERS>
+            <ECUC-CONTAINER-VALUE>
+              <SHORT-NAME>EcucPostBuildVariants</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/HuLa/EcuC/EcucPostBuildVariants</DEFINITION-REF>
+              <REFERENCE-VALUES>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-FOREIGN-REFERENCE-DEF">/HuLa/EcuC/EcucPostBuildVariants/EcucPostBuildVariantRef</DEFINITION-REF>
+                  <VALUE-REF DEST="PREDEFINED-VARIANT">/EB/PostBuildSelectable/VS0</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-FOREIGN-REFERENCE-DEF">/HuLa/EcuC/EcucPostBuildVariants/EcucPostBuildVariantRef</DEFINITION-REF>
+                  <VALUE-REF DEST="PREDEFINED-VARIANT">/EB/PostBuildSelectable/VS1</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+                <ECUC-REFERENCE-VALUE>
+                  <DEFINITION-REF DEST="ECUC-FOREIGN-REFERENCE-DEF">/HuLa/EcuC/EcucPostBuildVariants/EcucSelectedPostBuildVariantRef</DEFINITION-REF>
+                  <VALUE-REF DEST="PREDEFINED-VARIANT">/EB/PostBuildSelectable/VS1</VALUE-REF>
+                </ECUC-REFERENCE-VALUE>
+              </REFERENCE-VALUES>
+            </ECUC-CONTAINER-VALUE>
+          </CONTAINERS>
+        </ECUC-MODULE-CONFIGURATION-VALUES>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

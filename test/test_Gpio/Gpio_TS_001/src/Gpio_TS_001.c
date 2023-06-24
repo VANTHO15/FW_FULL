@@ -13,7 +13,7 @@ void RESULT_RunAllTests(RESULT_TestSuite_t* TS)
     }
     for(Id = 0; Id < TS->TC_Count; Id++)
     {
-        TestCaseResult[Id] = 0;   // set false
+        TestCaseResult[Id] = 1;   // set true
         TS->TC_Ptr[Id]();
     }
 
@@ -21,10 +21,10 @@ void RESULT_RunAllTests(RESULT_TestSuite_t* TS)
 
 void RESULT_Assert(uint8_t result)
 {
-    if(result)
+    if(!result)
     {
         /*  Test True */
-        TestCaseResult[Id] = 1;
+        TestCaseResult[Id] = 0;
     }
 }
 RESULT_TestCase_t Array_TC_OF_TS[]= {Gpio_TC_001,Gpio_TC_002};

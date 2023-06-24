@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<memento version="1.0" lastmodified="May 10, 2023 5:59:38 PM">
+    <EditPostBuildVariantsSelectable>
+        <__metadata>
+            <VariantsPageGroupId __expanded="true"/>
+            <CriterionsPageGroupId __expanded="true"/>
+            <CriterionsTableWidget __sortcolumn="1" __width="100 350"
+                __visible="ny" __sortorder="1"/>
+            <CompuMethodTableWidget __sortcolumn="1"
+                __width="100 100 150 50" __visible="nyyn" __sortorder="1"/>
+            <VariantsTableWidget __sortcolumn="1" __width="100 300 250"
+                __visible="nyy" __sortorder="1"/>
+        </__metadata>
+        <CriterionsTableMemento/>
+        <CompuMethodTableMemento/>
+        <VariantsTableMemento/>
+    </EditPostBuildVariantsSelectable>
+</memento>
