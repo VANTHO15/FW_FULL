@@ -42,6 +42,7 @@ class mTest(): # chứa các biến đầu vào input
 
     # get XDM_FILE in TS
     PathGetDirFromTS = f'{TEST_DIR}/{TEST_NAME}/{TEST_NAME}.py'
+    print(PathGetDirFromTS)
     if os.path.exists(PathGetDirFromTS):
         exec(open(PathGetDirFromTS).read())
     

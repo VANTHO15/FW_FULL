@@ -1,27 +1,24 @@
 ﻿###############################################################################
 #
-# IAR ELF Linker V8.50.9.278/W32 for ARM                  22/Jun/2023  10:35:24
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  24/Jun/2023  14:50:36
 # Copyright 2007-2020 IAR Systems AB.
 #
 #    Output file  =
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.elf
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.elf
 #    Map file     =
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.map
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.map
 #    Command line =
 #        --cpu=Cortex-M4 --entry=Reset_Handler --config
-#        F:/IAR/FW_THO/FW_THO/FW_HuLa-master/tool/../env_iar/linker/ThoNV_stm32f407.icf
+#        C:/Users/Admin/Desktop/FW/FW_FULL/tool/../env_iar/linker/ThoNV_stm32f407.icf
 #        --map
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.map
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\stm32f407xx_gpio_driver.o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\stm32_startup.o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TC_001.o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TC_002.o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Test.o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Test_VS0_PB.o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Test_VS1_PB.o
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.map
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\stm32f407xx_gpio_driver.o
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\stm32_startup.o
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.o
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TC_001.o
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TC_002.o
 #        -o
-#        F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.elf
+#        C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile\Gpio_TS_001.elf
 #
 ###############################################################################
 
@@ -132,7 +129,7 @@ No sections matched the following patterns:
   Section              Kind         Address    Size  Object
   -------              ----         -------    ----  ------
 "P1-P3", part 1 of 2:                        0x1308
-  codeBlock                      0x800'0000   0x55a  <Block>
+  codeBlock                      0x800'0000   0x572  <Block>
     .text              ro code   0x800'0000   0x28c  stm32f407xx_gpio_driver.o [1]
     .text              ro code   0x800'028c    0x58  Gpio_TS_001.o [1]
     .text              ro code   0x800'02e4    0x3a  ABImemset48.o [2]
@@ -229,7 +226,7 @@ No sections matched the following patterns:
     .text              ro code   0x800'0548     0x4  stm32_startup.o [1]
     .text              ro code   0x800'054c     0x4  stm32_startup.o [1]
     .text              ro code   0x800'0550     0x4  stm32_startup.o [1]
-    .text              ro code   0x800'0554     0x6  Gpio_TC_002.o [1]
+    .text              ro code   0x800'0554    0x1e  Gpio_TC_002.o [1]
   initvectortable                0x800'1000   0x1a8  <Block>
     Initializer bytes  const     0x800'1000   0x1a8  <for section .intvec-1>
   startupBlock                   0x800'11a8   0x100  <Block>
@@ -294,14 +291,14 @@ command line/config:
     ----------------------------------------------------
     Total:
 
-F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile: [1]
+C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile: [1]
     Gpio_TC_001.o                  196                13
-    Gpio_TC_002.o                    6
+    Gpio_TC_002.o                   30
     Gpio_TS_001.o                   88       16       32
     stm32_startup.o                624      496      424
     stm32f407xx_gpio_driver.o      652
     ----------------------------------------------------
-    Total:                       1'566      512      469
+    Total:                       1'590      512      469
 
 rt7M_tl.a: [2]
     ABImemset48.o                   58
@@ -310,7 +307,7 @@ rt7M_tl.a: [2]
 
     Gaps                             2
 --------------------------------------------------------
-    Grand Total:                 1'626      512      469
+    Grand Total:                 1'650      512      469
 
 
 *******************************************************************************
@@ -336,7 +333,7 @@ GPIO_ToggleOutputPin     0x800'024b    0xe  Code  Gb  stm32f407xx_gpio_driver.o 
 GPIO_WriteToOutputPin    0x800'0235   0x16  Code  Gb  stm32f407xx_gpio_driver.o [1]
 GpioLed                 0x2000'0020    0xc  Data  Gb  Gpio_TC_001.o [1]
 Gpio_TC_001              0x800'0323   0xa6  Code  Gb  Gpio_TC_001.o [1]
-Gpio_TC_002              0x800'0555    0x6  Code  Gb  Gpio_TC_002.o [1]
+Gpio_TC_002              0x800'0555   0x1e  Code  Gb  Gpio_TC_002.o [1]
 INT_SRAM_END {Abs}      0x2001'f400         Data  Gb  <internal module>
 INT_SRAM_START {Abs}    0x2000'0000         Data  Gb  <internal module>
 Id                      0x2000'0010    0x1  Data  Gb  Gpio_TS_001.o [1]
@@ -372,7 +369,7 @@ bss_nocache$$Limit      0x2001'b1a8          --   Gb  - Linker created -
 bss_sharable$$Base      0x2001'ccf4          --   Gb  - Linker created -
 bss_sharable$$Limit     0x2001'ccf4          --   Gb  - Linker created -
 codeBlock$$Base          0x800'0000          --   Gb  - Linker created -
-codeBlock$$Limit         0x800'055a          --   Gb  - Linker created -
+codeBlock$$Limit         0x800'0572          --   Gb  - Linker created -
 count                   0x2000'002c    0x1  Data  Gb  Gpio_TC_001.o [1]
 data$$Base              0x2000'0000          --   Gb  - Linker created -
 data$$Limit             0x2000'0010          --   Gb  - Linker created -
@@ -401,10 +398,10 @@ vectortable$$Base       0x2001'b000          --   Gb  - Linker created -
 vectortable$$Limit      0x2001'b1a8          --   Gb  - Linker created -
 
 
-[1] = F:\IAR\FW_THO\FW_THO\FW_HuLa-master\output\Gpio\Gpio_TS_001\iar\compile
+[1] = C:\Users\Admin\Desktop\FW\FW_FULL\output\Gpio\Gpio_TS_001\iar\compile
 [2] = rt7M_tl.a
 
-  1'626 bytes of readonly  code memory
+  1'650 bytes of readonly  code memory
     512 bytes of readonly  data memory
     469 bytes of readwrite data memory
 

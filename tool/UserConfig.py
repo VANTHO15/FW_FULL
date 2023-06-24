@@ -1,6 +1,6 @@
 #======================================= Begin User Config ==========================
 # Config Test
-PRO_DIR = 'F:/IAR/FW_THO/FW_THO/FW_HuLa-master/tool'
+PRO_DIR = 'C:/Users/Admin/Desktop/FW/FW_FULL/tool'
 MODULE = 'Gpio'
 TEST_NAME = 'Gpio_TS_001'
 TEST_NAME_DESCRIPTION = "Test gpio blynk led"

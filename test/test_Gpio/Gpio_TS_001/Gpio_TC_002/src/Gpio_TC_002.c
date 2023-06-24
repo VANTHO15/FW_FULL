@@ -6,4 +6,7 @@
 void Gpio_TC_002(void)
 {
 	RESULT_Assert(8==9);
+	RESULT_Assert(8==8);
+	RESULT_Assert(8==9);
+	RESULT_Assert(8==8);
 }
