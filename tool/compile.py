@@ -22,7 +22,7 @@ def Read_argument():
     # init parser
     parser = argparse.ArgumentParser(description="write args")
     # Options for tool
-    parser.add_argument("-o", "--options", help="prepare generate compile execute report", nargs='+', default=None)
+    parser.add_argument("-o", "--options", help="clean generate compile debug report", nargs='+', default=None)
     return parser.parse_args()
 
 class Compile(CommonStep):
