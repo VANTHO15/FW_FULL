@@ -21,5 +21,6 @@ python main.py -o clean     : clean output
 python main.py -o generate  : generate eb tresos
 python main.py -o compile   : compile code 
 python main.py -o debug     : debug bằng Ozone
+python main.py -o nodebug   : run để lấy report
 python main.py -o report    : chạy report ra file html
 python main.py -o run       : download code

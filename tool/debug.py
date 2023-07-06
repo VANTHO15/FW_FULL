@@ -98,6 +98,11 @@ class Debug(CommonStep):
         for key,value in LIST_REP.items():
             JdebugData = JdebugData.replace(key,value)
 
+        if self.Debug == 1:
+            JdebugData = JdebugData.replace("CHECK_DEBUG","")
+        else:
+            JdebugData = JdebugData.replace("CHECK_DEBUG","Debug.Continue();")
+
         
         DebugFile = os.path.join(self.Project,self.TestName+".jdebug")
         DebugFileOld = os.path.join(self.Project,self.TestName+".jdebug.user")

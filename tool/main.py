@@ -69,6 +69,8 @@ class mRunTool():
             Compile(mTest=self.Mytest).Run()
         elif self.Step == "debug":
             Debug(mTest=self.Mytest, Debug = 1).Run()
+        elif self.Step == "nodebug":
+            Debug(mTest=self.Mytest, Debug = 2).Run()
         elif self.Step == "report":
             Report(mTest=self.Mytest).Run()
         elif self.Step == "run":

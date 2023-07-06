@@ -12,6 +12,7 @@ void OnProjectLoad (void) {
 void OnStartupComplete (void) {
     Util.Log("Jdebug script: OnStartupComplete is running");
     Break.Set(END_OF_TEST_JDEBUG); // luôn có 1 breakpoint ở trong đầu hàm main, sau đó tạo breakpoint này để sau này nhảy tới sẽ dừng ở đây
+    CHECK_DEBUG
 }
 
 void AfterTargetReset (void) {
