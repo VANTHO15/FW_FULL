@@ -1,8 +1,8 @@
 #======================================= Begin User Config ==========================
 # Config Test
-PRO_DIR = 'C:/Users/Admin/Desktop/FW/FW_FULL/tool'
+PRO_DIR = 'F:/Jenkin/00Source/FW_FULL/tool'
 MODULE = 'Gpio'
-TEST_NAME = 'Gpio_TS_001'
+TEST_NAME = 'Gpio_TS_001' 
 TEST_NAME_DESCRIPTION = "Test gpio blynk led"
 LIST_TC_OF_TS = ['Gpio_TC_001','Gpio_TC_002']
 LIST_TC_DESCRIPTION = ['Test gpio blynk led pd13','Test gpio blynk led pd14']
@@ -13,7 +13,7 @@ EB_DIR = "C:/EB/tresos"
 # Compile
 COMPILER_DIR_GCC = "C:/GCC_THO"
 COMPILER_DIR_IAR = "C:/Program Files (x86)/IAR Systems/Embedded Workbench 8.4/arm"
-COMPILER = "iar"   # gcc/iar/ghs/gcc_c
+COMPILER = "gcc"   # gcc/iar/ghs/gcc_c
 
 # Execute
 OZONE_FILE = "C:/Tool/Portable_Ozone_Jlink/OzoneV3.26h/OzoneV3.26h/Ozone.exe"
