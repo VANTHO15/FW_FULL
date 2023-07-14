@@ -1,6 +1,6 @@
 Project.SetDevice ("STM32F407VG");
-Project.SetHostIF ("USB", "59768862");
 Target core support plugin loaded.: C:/Tool/Portable_Ozone_Jlink/OzoneV3.26h/OzoneV3.26h/Plugins/Core/CorePluginARM.dll
+Project.SetHostIF ("USB", "59768862");
 Project.SetTargetIF ("JTAG");
 Project.SetTIFSpeed ("4 MHz");
 File.Open ("F:/Jenkin/00Source/FW_FULL/output/Gpio/Gpio_TS_001/gcc/compile/Gpio_TS_001.elf");
@@ -8,7 +8,7 @@ Target.EraseChip();
 Jdebug script: OnProjectLoad is running
 No CPU register set description file specified, loading default: C:/Tool/Portable_Ozone_Jlink/OzoneV3.26h/OzoneV3.26h/Config/CPU/Cortex-M4F.svd.
 Project.AddSvdFile ("C:/Tool/Portable_Ozone_Jlink/OzoneV3.26h/OzoneV3.26h/Config/CPU/Cortex-M4F.svd");
-File.Open: completed in 155 ms
+File.Open: completed in 169 ms
 Program segments:
   Address         Size         Code      RO Data      RW Data      ZI Data    Flg
 ---------    ---------    ---------    ---------    ---------    ---------    ---
@@ -51,17 +51,17 @@ ROMTbl[0] @ E00FF000
 [0][4]: E0040000 CID B105900D PID 000BB9A1 TPIU
 [0][5]: E0041000 CID B105900D PID 000BB925 ETM
 Connected to target device.
+T-bit of XPSR is 0 but should be 1. Changed to 1.
 Reset: Halt core after reset via DEMCR.VC_CORERESET.
 Reset: Reset device via AIRCR.SYSRESETREQ.
+T-bit of XPSR is 0 but should be 1. Changed to 1.
 Jdebug script: AfterTargetReset is running
 Elf.GetBaseAddr(); // returns 0x8000000
-Target.ReadU32 (0x08000000); // returns 0x4, data is 0xD1492901
-Target.SetReg ("SP", 0xD1492901);
+Target.ReadU32 (0x08000000); // returns 0x4, data is 0xF80EF000
+Target.SetReg ("SP", 0xF80EF000);
 Elf.GetEntryPointPC(); // returns 0x8000000
 Target.SetReg ("PC", 0x8000000);
-J-Link: Flash download: Bank 0 @ 0x08000000: 1 range affected (16384 bytes)
-J-Link: Flash download: Total: 0.702s (Prepare: 0.331s, Compare: 0.001s, Erase: 0.328s, Program & Verify: 0.027s, Restore: 0.013s)
-J-Link: Flash download: Program & Verify speed: 592 KB/s
+J-Link: Flash download: Bank 0 @ 0x08000000: Skipped. Contents already match
 Jdebug script: AfterTargetDownload is running
 Elf.GetBaseAddr(); // returns 0x8000000
 Target.ReadU32 (0x08000000); // returns 0x4, data is 0xF80EF000
@@ -76,7 +76,4 @@ Jdebug script: AfterTargetHalt is running
 Target.GetReg ("R15"); // returns 0x800001E
 Target.SaveMemory ("F:\Jenkin\00Source\FW_FULL\output\Gpio\Gpio_TS_001\gcc\debug\result\dump.log", 0x20000013, 0xA);
 Debug.Stop();
-OnDisconnectTarget() start
-OnDisconnectTarget() end
-Disconnected from target device.
 File.Exit();

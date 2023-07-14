@@ -1,4 +1,4 @@
-LINKER_FILE = f'{PRO_DIR}/../env_{COMPILER}/linker/ThoNV_stm32f407.icf'
+LINKER_FILE = f'{PRO_DIR}/../env_{COMPILER}/linker/ThoNV_stm32f407.ld'
 LK_FILE = "C:/ghs/comp/elxr.exe"
 CC_FILE = "C:/ghs/comp/ccarm.exe"
 AC_FILE = "C:/ghs/comp/asarm.exe"
